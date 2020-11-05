@@ -12,6 +12,7 @@ namespace DAL.MockRepositories
         public MockProjectRepository()
         {
             _projects = new List<Project>();
+            CreateProjectsList();
         }
 
         private void CreateProjectsList()

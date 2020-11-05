@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DAL.MockRepositories;
+using DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -34,6 +36,7 @@ namespace LicenseManagerWeb
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddScoped<IProjectRepository, MockProjectRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
