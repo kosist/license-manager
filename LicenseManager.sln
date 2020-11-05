@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LicenseManagerWeb", "LicenseManagerWeb\LicenseManagerWeb.csproj", "{708E49B2-A2BF-4014-9D0F-BD306B8AF487}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{0F2BF4EE-0632-40B0-89E8-4095A6B816CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{94714FED-35BF-45C3-9FA6-8636944A851A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{708E49B2-A2BF-4014-9D0F-BD306B8AF487}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{708E49B2-A2BF-4014-9D0F-BD306B8AF487}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{708E49B2-A2BF-4014-9D0F-BD306B8AF487}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F2BF4EE-0632-40B0-89E8-4095A6B816CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F2BF4EE-0632-40B0-89E8-4095A6B816CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F2BF4EE-0632-40B0-89E8-4095A6B816CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F2BF4EE-0632-40B0-89E8-4095A6B816CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94714FED-35BF-45C3-9FA6-8636944A851A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94714FED-35BF-45C3-9FA6-8636944A851A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94714FED-35BF-45C3-9FA6-8636944A851A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94714FED-35BF-45C3-9FA6-8636944A851A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

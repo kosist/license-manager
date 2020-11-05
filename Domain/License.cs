@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DAL
+namespace Domain
 {
     public class License : BaseItem
     {

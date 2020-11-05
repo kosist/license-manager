@@ -1,4 +1,4 @@
-﻿namespace DAL
+﻿namespace Domain
 {
     public class ViProtection : BaseItem
     {

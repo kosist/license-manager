@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DAL
+namespace Domain
 {
     public class Project : BaseItem
     {
