@@ -7,18 +7,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LicenseManagerWeb.Controllers
 {
-    public class ProjectController : Controller
+    public class ProjectsController : Controller
     {
         private IProjectRepository _projectRepo;
 
-        public ProjectController(IProjectRepository projectRepo)
+        public ProjectsController(IProjectRepository projectRepo)
         {
             _projectRepo = projectRepo;
         }
 
         public IActionResult Index()
         {
-            return View(_projectRepo.GetProjectsList());
+            return View(_projectRepo.GetList());
+        }
+
+        public IActionResult New()
+        {
+            return View();
         }
     }
 }

@@ -5,13 +5,10 @@ using Domain;
 
 namespace DAL.MockRepositories
 {
-    public class MockProjectRepository : IProjectRepository
+    public class MockProjectRepository : GenericMockRepository<Project>, IProjectRepository
     {
-        private List<Project> _projects;
-
-        public MockProjectRepository()
+        public MockProjectRepository() : base()
         {
-            _projects = new List<Project>();
             CreateProjectsList();
         }
 
@@ -24,24 +21,9 @@ namespace DAL.MockRepositories
             var proj1 = new Project {Customer = customer, Name = "Dummy project 1"};
             var proj2 = new Project {Customer = customer, Name = "Dummy project 2"};
             var proj3 = new Project {Customer = customer, Name = "Dummy project 3"};
-            AddProject(proj1);
-            AddProject(proj2);
-            AddProject(proj3);
-        }
-
-        public IEnumerable<Project> GetProjectsList()
-        {
-            return _projects;
-        }
-
-        public void AddProject(Project project)
-        {
-            if (_projects.Count != 0)
-            {
-                var targetId = _projects.Max(p => p.Id);
-                project.Id = +1;
-            }
-            _projects.Add(project);
+            Insert(proj1);
+            Insert(proj2);
+            Insert(proj3);
         }
 
         public void AddProductToProject(int projectId, Product product)

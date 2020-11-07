@@ -3,10 +3,8 @@ using Domain;
 
 namespace DAL.Repositories
 {
-    public interface IProjectRepository
+    public interface IProjectRepository : IGenericItemRepository<Project>
     {
-        IEnumerable<Project> GetProjectsList();
-        void AddProject(Project project);
         void AddProductToProject(int projectId, Product product);
     }
 }
