@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using DAL.Repositories;
 using Domain;
 
-namespace DAL.Repositories
+namespace DAL.MockRepositories
 {
     public abstract class GenericMockRepository<TDomain> : IGenericItemRepository<TDomain> where TDomain : BaseItem
     {

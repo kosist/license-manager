@@ -37,6 +37,7 @@ namespace LicenseManagerWeb
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddScoped<IProjectRepository, MockProjectRepository>();
+            services.AddScoped<ICustomerRepository, MockCustomerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
