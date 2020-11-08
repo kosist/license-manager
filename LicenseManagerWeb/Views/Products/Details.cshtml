@@ -1,0 +1,20 @@
+﻿@model Product
+
+@{
+    ViewBag.Title = Model.Name + " Details";
+    Layout = "_Layout";
+}
+
+<a href="Products/Edit" class="btn btn-primary mb-1" role="button">Edit</a>
+<h2>Name: @Model.Name</h2>
+<h3>Version: @Model.Version</h3>
+<span/>
+<h2>Links:</h2>
+<p/>
+<a href=@Model.ProductMetadata.SharePointLink>@Model.ProductMetadata.SharePointLink</a>
+<p/>
+<a href=@Model.ProductMetadata.SmartSheetLink>@Model.ProductMetadata.SmartSheetLink</a>
+<p/>
+<a href=@Model.ProductMetadata.EasyProjectLink>@Model.ProductMetadata.EasyProjectLink</a>
+<p/>
+<a href=@Model.ProductMetadata.SourceCodeLocation>@Model.ProductMetadata.SourceCodeLocation</a>

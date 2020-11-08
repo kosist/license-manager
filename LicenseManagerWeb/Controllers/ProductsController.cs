@@ -1,4 +1,5 @@
-﻿using DAL.Repositories;
+﻿using System;
+using DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LicenseManagerWeb.Controllers
@@ -15,6 +16,14 @@ namespace LicenseManagerWeb.Controllers
         public IActionResult Index()
         {
             return View(_productRepo.GetList());
+        }
+
+        public IActionResult Details(int id)
+        {
+            if (id < 0)
+                throw new ArgumentOutOfRangeException("Id", "Product id is less than 0");
+            var product = _productRepo.GetById(id);
+            return View(product);
         }
     }
 }
