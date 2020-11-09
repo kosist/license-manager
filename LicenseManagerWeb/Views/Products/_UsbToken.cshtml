@@ -1,0 +1,54 @@
+﻿@model UsbTokenLicense
+
+
+<div class="row">
+    <div class="col-2" align="right">
+        <h4>K0:</h4>
+    </div>
+    <div class="col-10">
+        <h4>@Model.K0</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2" align="right">
+        <h4>K1:</h4>
+    </div>
+    <div class="col-10">
+        <h4>@Model.K1</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2" align="right">
+        <h4>SN:</h4>
+    </div>
+    <div class="col-10">
+        <h4>@Model.SerialNumber</h4>
+    </div>
+</div>
+@if (Model.UsbTokenApi != null)
+{
+    <div class="row">
+        <div class="col-2" align="right">
+            <h4>HW Revision:</h4>
+        </div>
+        <div class="col-10">
+            <h4>@Model.UsbTokenApi.HwVersion</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2" align="right">
+            <h4>SW Revision:</h4>
+        </div>
+        <div class="col-10">
+            <h4>@Model.UsbTokenApi.SwVersion</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2" align="right">
+            <h4>API Version:</h4>
+        </div>
+        <div class="col-10">
+            <h4>@Model.UsbTokenApi.ApiVersion</h4>
+        </div>
+    </div>
+}

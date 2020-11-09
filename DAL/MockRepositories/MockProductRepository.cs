@@ -24,6 +24,13 @@ namespace DAL.MockRepositories
                     SharePointLink = "http:sp/1.com",
                     SmartSheetLink = "http:sm/1.com",
                     SourceCodeLocation = "http:git/1.com"
+                },
+                LicenseType = LicenseTypeEnum.UsbToken,
+                License = new UsbTokenLicense
+                {
+                    Id = 1,
+                    K0 = "K0 key",
+                    K1 = "K1 key"
                 }
             };
             Insert(product);
