@@ -1,0 +1,34 @@
+﻿@model UsbTokenLicense
+
+<div class="row">
+    <div class="col-3" align="right">
+        <h4>Issued by:</h4>
+    </div>
+    <div class="col-9">
+        @if (Model.IssuedBy != null)
+        {
+            <h4>@Model.IssuedBy.Name + " " + @Model.IssuedBy.Surname</h4>
+        }
+        else
+        {
+            <h4>Unknown user</h4>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3" align="right">
+        <h4>Issue date:</h4>
+    </div>
+    <div class="col-9">
+        @if (Model.IssueDate != null)
+        {
+            <h4>@Model.IssueDate.Date</h4>
+        }
+        else
+        {
+            <h4>"Unknown date"</h4>
+        }
+    </div>
+</div>
+

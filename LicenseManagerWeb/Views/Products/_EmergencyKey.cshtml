@@ -1,0 +1,21 @@
+﻿@model EmergencyKey
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-3" align="right">
+            <h4>Emergency Key:</h4>
+        </div>
+        <div class="col-9">
+            <h4>@Model.Key</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3" align="right">
+            <h4>Time interval, min:</h4>
+        </div>
+        <div class="col-9">
+            <h4>@Model.ExecutionIntervalMinutes</h4>
+        </div>
+    </div>
+}

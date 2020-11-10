@@ -25,12 +25,18 @@ namespace DAL.MockRepositories
                     SmartSheetLink = "http:sm/1.com",
                     SourceCodeLocation = "http:git/1.com"
                 },
-                LicenseType = LicenseTypeEnum.UsbToken,
                 License = new UsbTokenLicense
                 {
                     Id = 1,
                     K0 = "K0 key",
-                    K1 = "K1 key"
+                    K1 = "K1 key",
+                    SerialNumber = "15789"
+                },
+                EmergencyKey = new EmergencyKey
+                {
+                    Id = 1,
+                    Key = "12345",
+                    ExecutionIntervalMinutes = 30
                 }
             };
             Insert(product);
