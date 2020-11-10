@@ -1,4 +1,5 @@
-﻿using DAL.Repositories;
+﻿using System.Collections.Generic;
+using DAL.Repositories;
 using Domain;
 
 namespace DAL.MockRepositories
@@ -12,6 +13,8 @@ namespace DAL.MockRepositories
 
         private void CreateProductsList()
         {
+            var viProtection = new List<ViProtection>();
+            viProtection.Add(new ViProtection{Id = 1, Description = "VI 01", Password = "123456789"});
             var product = new Product
             {
                 Id = 1,
@@ -37,7 +40,8 @@ namespace DAL.MockRepositories
                     Id = 1,
                     Key = "12345",
                     ExecutionIntervalMinutes = 30
-                }
+                },
+                ViProtectionInfo = viProtection,
             };
             Insert(product);
         }

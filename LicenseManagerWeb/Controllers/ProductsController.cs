@@ -25,5 +25,20 @@ namespace LicenseManagerWeb.Controllers
             var product = _productRepo.GetById(id);
             return View(product);
         }
+
+        public IActionResult Edit(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = _productRepo.GetById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
     }
 }

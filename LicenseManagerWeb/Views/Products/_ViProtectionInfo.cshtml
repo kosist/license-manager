@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ViProtection>
+
+@foreach (var info in Model)
+{
+    <div class="row">
+        <div class="col-3" align="right">
+            <h4>@info.Description</h4>
+        </div>
+        <div class="col-9">
+            <h4>@info.Password</h4>
+        </div>
+    </div>
+}

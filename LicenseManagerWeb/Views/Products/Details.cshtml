@@ -5,9 +5,9 @@
     Layout = "_Layout";
 }
 
-<div class="container">
-    <a href="Products/Edit" class="btn btn-primary mb-1" role="button">Edit</a>
-</div>
+    <div class="container">
+        <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mb-1">Edit</a>
+    </div>
 
 
 <div class="container">
@@ -55,6 +55,7 @@
     }
     <partial name="_EmergencyKey" model="Model.EmergencyKey" />
     <partial name="_IssueData" model="Model.License" />
+    <partial name="_ViProtectionInfo" model="Model.ViProtectionInfo" />
 
 </div>
 
