@@ -23,17 +23,23 @@ namespace DAL.MockRepositories
                 ProductMetadata = new ProductMeta
                 {
                     Id = 1,
-                    EasyProjectLink = "http:ep/1.com",
-                    SharePointLink = "http:sp/1.com",
-                    SmartSheetLink = "http:sm/1.com",
-                    SourceCodeLocation = "http:git/1.com"
+                    EasyProjectLink = "https://www.easyproject.cz/",
+                    SharePointLink = "https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration",
+                    SmartSheetLink = "https://www.smartsheet.com/",
+                    SourceCodeLocation = "https://github.com/"
                 },
                 License = new UsbTokenLicense
                 {
                     Id = 1,
                     K0 = "K0 key",
                     K1 = "K1 key",
-                    SerialNumber = "15789"
+                    SerialNumber = "15789",
+                    UsbTokenApi = new UsbTokenApi
+                    {
+                        ApiVersion = "0.1.1",
+                        HwVersion = "1.2.2",
+                        SwVersion = "2.3.3"
+                    }
                 },
                 EmergencyKey = new EmergencyKey
                 {
