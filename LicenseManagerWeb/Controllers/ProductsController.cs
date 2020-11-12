@@ -1,5 +1,6 @@
 ﻿using System;
 using DAL.Repositories;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LicenseManagerWeb.Controllers
@@ -39,6 +40,21 @@ namespace LicenseManagerWeb.Controllers
                 return NotFound();
             }
             return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _productRepo.Update(product);
+                return RedirectToAction("Details", "Products", new { id = product.Id});
+            }
+            else
+            {
+                return ValidationProblem();
+            }
+                
         }
     }
 }

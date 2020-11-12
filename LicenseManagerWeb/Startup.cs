@@ -36,9 +36,9 @@ namespace LicenseManagerWeb
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddScoped<IProjectRepository, MockProjectRepository>();
-            services.AddScoped<ICustomerRepository, MockCustomerRepository>();
-            services.AddScoped<IProductRepository, MockProductRepository>();
+            services.AddSingleton<IProjectRepository, MockProjectRepository>();
+            services.AddSingleton<ICustomerRepository, MockCustomerRepository>();
+            services.AddSingleton<IProductRepository, MockProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
