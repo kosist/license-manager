@@ -50,13 +50,13 @@
             </div>
         </div>
 
-        @*@if (Model.License is UsbTokenLicense)
+        @if (Model.License is UsbTokenLicense)
         {
-            <partial name="_UsbToken" model="Model.License" />
+            <partial name="../Licenses/_UsbToken" model="Model.License" />
         }
         <partial name="_EmergencyKey" model="Model.EmergencyKey" />
         
-        <partial name="_ViProtectionInfo" model="Model.ViProtectionInfo" />*@
+        <partial name="_ViProtectionInfo" model="Model.ViProtectionInfo" />
 
     </div>
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DAL.MockRepositories;
 using DAL.Repositories;
+using Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -39,6 +40,7 @@ namespace LicenseManagerWeb
             services.AddSingleton<IProjectRepository, MockProjectRepository>();
             services.AddSingleton<ICustomerRepository, MockCustomerRepository>();
             services.AddSingleton<IProductRepository, MockProductRepository>();
+            services.AddSingleton<ILicenseRepository<UsbTokenLicense>, MockUsbTokenRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
