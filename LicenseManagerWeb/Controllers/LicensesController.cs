@@ -30,5 +30,20 @@ namespace LicenseManagerWeb.Controllers
             return View(license);
         }
 
+        public IActionResult Edit(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var license = _licenseRepo.GetById(id);
+            if (license == null)
+            {
+                return NotFound();
+            }
+            return View(license);
+        }
+
     }
 }

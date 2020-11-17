@@ -7,6 +7,7 @@ namespace Domain
     public class License : BaseItem
     {
         [DisplayName("License Label")]
+        [Required]
         public string Name { get; set; }
 
         [DisplayName("Issued by")]

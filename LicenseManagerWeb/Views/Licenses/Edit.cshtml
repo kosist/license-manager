@@ -1,0 +1,68 @@
+﻿@model Domain.UsbTokenLicense
+
+<h4>USB Token License</h4>
+<hr />
+
+    
+<form asp-action="Edit">
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-md-6 mb-4">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="K0" class="control-label"></label>
+                <input asp-for="K0" class="form-control w-50" />
+                <span asp-validation-for="K0" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="K1" class="control-label"></label>
+                <input asp-for="K1" class="form-control w-50" />
+                <span asp-validation-for="K1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SerialNumber" class="control-label"></label>
+                <input asp-for="SerialNumber" class="form-control w-25" />
+                <span asp-validation-for="SerialNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control w-50" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IssueDate" class="control-label"></label>
+                <input asp-for="IssueDate" class="form-control w-50" />
+                <span asp-validation-for="IssueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <input type="hidden" asp-for="UsbTokenApi.Id" />
+            <div class="form-group">
+                <label asp-for="UsbTokenApi.HwVersion" class="control-label"></label>
+                <input asp-for="UsbTokenApi.HwVersion" class="form-control w-25" />
+                <span asp-validation-for="UsbTokenApi.HwVersion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsbTokenApi.SwVersion" class="control-label"></label>
+                <input asp-for="UsbTokenApi.SwVersion" class="form-control w-25" />
+                <span asp-validation-for="UsbTokenApi.SwVersion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsbTokenApi.ApiVersion" class="control-label"></label>
+                <input asp-for="UsbTokenApi.ApiVersion" class="form-control w-25" />
+                <span asp-validation-for="UsbTokenApi.ApiVersion" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
