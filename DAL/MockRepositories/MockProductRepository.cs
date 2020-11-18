@@ -6,8 +6,11 @@ namespace DAL.MockRepositories
 {
     public class MockProductRepository : GenericMockRepository<Product>, IProductRepository
     {
-        public MockProductRepository() : base()
+        private ILicenseRepository<UsbTokenLicense> _licenseRepo;
+
+        public MockProductRepository(ILicenseRepository<UsbTokenLicense> licenseRepo) : base()
         {
+            _licenseRepo = licenseRepo;
             CreateProductsList();
         }
 
@@ -28,19 +31,7 @@ namespace DAL.MockRepositories
                     SmartSheetLink = "https://www.smartsheet.com/",
                     SourceCodeLocation = "https://github.com/"
                 },
-                License = new UsbTokenLicense
-                {
-                    Id = 1,
-                    K0 = "K0 key",
-                    K1 = "K1 key",
-                    SerialNumber = "15789",
-                    UsbTokenApi = new UsbTokenApi
-                    {
-                        ApiVersion = "0.1.1",
-                        HwVersion = "1.2.2",
-                        SwVersion = "2.3.3"
-                    }
-                },
+                License = _licenseRepo.GetById(1),
                 EmergencyKey = new EmergencyKey
                 {
                     Id = 1,

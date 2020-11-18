@@ -18,7 +18,7 @@ namespace DAL.MockRepositories
             return items;
         }
 
-        public TDomain GetById(int id)
+        public TDomain GetById(int? id)
         {
             return items.Find(obj => obj.Id == id);
         }

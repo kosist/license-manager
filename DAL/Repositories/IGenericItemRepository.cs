@@ -8,7 +8,7 @@ namespace DAL.Repositories
 
     {
         IEnumerable<TDomain> GetList();
-        TDomain GetById(int id);
+        TDomain GetById(int? id);
         void Insert(TDomain item);
         void Update(TDomain item);
         void Delete(int id);

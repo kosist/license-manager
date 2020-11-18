@@ -30,11 +30,11 @@ namespace LicenseManagerWeb.Controllers
             return View(license);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return View(new UsbTokenLicense());
             }
 
             var license = _licenseRepo.GetById(id);
@@ -45,5 +45,18 @@ namespace LicenseManagerWeb.Controllers
             return View(license);
         }
 
+        [HttpPost]
+        public IActionResult Edit(UsbTokenLicense license)
+        {
+            if (ModelState.IsValid)
+            {
+                _licenseRepo.Update(license);
+                return RedirectToAction("Details", "Licenses", new { id = license.Id });
+            }
+            else
+            {
+                return ValidationProblem();
+            }
+        }
     }
 }
