@@ -2,16 +2,19 @@
 using DAL.Repositories;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using LicenseManagerWeb.ViewModels;
 
 namespace LicenseManagerWeb.Controllers
 {
     public class ProductsController : Controller
     {
         private IProductRepository _productRepo;
+        private ILicenseRepository<UsbTokenLicense> _licenseRepo;
 
-        public ProductsController(IProductRepository productRepo)
+        public ProductsController(IProductRepository productRepo, ILicenseRepository<UsbTokenLicense> licenseRepo)
         {
             _productRepo = productRepo;
+            _licenseRepo = licenseRepo;
         }
 
         public IActionResult Index()
@@ -27,11 +30,13 @@ namespace LicenseManagerWeb.Controllers
             return View(product);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
+            var productViewModel = new SwProductViewModel();
+            productViewModel.PopulateTokensList(_licenseRepo);
             if (id == null)
             {
-                return NotFound();
+                return View(productViewModel);
             }
 
             var product = _productRepo.GetById(id);
@@ -39,16 +44,17 @@ namespace LicenseManagerWeb.Controllers
             {
                 return NotFound();
             }
-            return View(product);
+            productViewModel.SwProduct = product;
+            return View(productViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(SwProductViewModel product)
         {
             if (ModelState.IsValid)
             {
-                _productRepo.Update(product);
-                return RedirectToAction("Details", "Products", new { id = product.Id});
+                _productRepo.Update(product.SwProduct);
+                return RedirectToAction("Details", "Products", new { id = product.SwProduct.Id });
             }
             else
             {
@@ -56,5 +62,6 @@ namespace LicenseManagerWeb.Controllers
             }
                 
         }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Domain.Product
+﻿@model LicenseManagerWeb.ViewModels.SwProductViewModel
 
 <h4>Product</h4>
 <hr />
@@ -6,24 +6,24 @@
     <div class="row">
         <div class="col-md-6 order-md-1">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="SwProduct.Id" />
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Product Information</span>
             </h4>
             <div class="form-group">
-                <label asp-for="ProductId" class="control-label"></label>
-                <input asp-for="ProductId" class="form-control w-25" />
-                <span asp-validation-for="ProductId" class="text-danger"></span>
+                <label asp-for="SwProduct.ProductId" class="control-label"></label>
+                <input asp-for="SwProduct.ProductId" class="form-control w-25" />
+                <span asp-validation-for="SwProduct.ProductId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control w-75" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="SwProduct.Name" class="control-label"></label>
+                <input asp-for="SwProduct.Name" class="form-control w-75" />
+                <span asp-validation-for="SwProduct.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Version" class="control-label"></label>
-                <input asp-for="Version" class="form-control w-25" />
-                <span asp-validation-for="Version" class="text-danger"></span>
+                <label asp-for="SwProduct.Version" class="control-label"></label>
+                <input asp-for="SwProduct.Version" class="form-control w-25" />
+                <span asp-validation-for="SwProduct.Version" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-6 order-md-2">
@@ -31,24 +31,35 @@
                 <span class="text-muted">Links</span>
             </h4>
             <div class="form-group">
-                <label asp-for="ProductMetadata.SourceCodeLocation" class="control-label"></label>
-                <input asp-for="ProductMetadata.SourceCodeLocation" class="form-control" />
-                <span asp-validation-for="ProductMetadata.SourceCodeLocation" class="text-danger"></span>
+                <label asp-for="SwProduct.ProductMetadata.SourceCodeLocation" class="control-label"></label>
+                <input asp-for="SwProduct.ProductMetadata.SourceCodeLocation" class="form-control" />
+                <span asp-validation-for="SwProduct.ProductMetadata.SourceCodeLocation" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductMetadata.SharePointLink" class="control-label"></label>
-                <input asp-for="ProductMetadata.SharePointLink" class="form-control" />
-                <span asp-validation-for="ProductMetadata.SharePointLink" class="text-danger"></span>
+                <label asp-for="SwProduct.ProductMetadata.SharePointLink" class="control-label"></label>
+                <input asp-for="SwProduct.ProductMetadata.SharePointLink" class="form-control" />
+                <span asp-validation-for="SwProduct.ProductMetadata.SharePointLink" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductMetadata.EasyProjectLink" class="control-label"></label>
-                <input asp-for="ProductMetadata.EasyProjectLink" class="form-control" />
-                <span asp-validation-for="ProductMetadata.EasyProjectLink" class="text-danger"></span>
+                <label asp-for="SwProduct.ProductMetadata.EasyProjectLink" class="control-label"></label>
+                <input asp-for="SwProduct.ProductMetadata.EasyProjectLink" class="form-control" />
+                <span asp-validation-for="SwProduct.ProductMetadata.EasyProjectLink" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductMetadata.SmartSheetLink" class="control-label"></label>
-                <input asp-for="ProductMetadata.SmartSheetLink" class="form-control" />
-                <span asp-validation-for="ProductMetadata.SmartSheetLink" class="text-danger"></span>
+                <label asp-for="SwProduct.ProductMetadata.SmartSheetLink" class="control-label"></label>
+                <input asp-for="SwProduct.ProductMetadata.SmartSheetLink" class="form-control" />
+                <span asp-validation-for="SwProduct.ProductMetadata.SmartSheetLink" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="UsbTokens" class="control-label"></label>
+                <select asp-for="UsbTokensListDto"
+                        asp-items="@(new SelectList(Model.UsbTokens,"Id","Label"))">
+                </select>
+                <span asp-validation-for="UsbTokens" class="text-danger"></span>
             </div>
         </div>
     </div>
