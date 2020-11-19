@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DAL.MockRepositories;
 using DAL.Repositories;
 using Domain;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using LicenseManagerWeb.Data;
+using LicenseManagerWeb.Mapping;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -41,6 +43,7 @@ namespace LicenseManagerWeb
             services.AddSingleton<ICustomerRepository, MockCustomerRepository>();
             services.AddSingleton<IProductRepository, MockProductRepository>();
             services.AddSingleton<ILicenseRepository<UsbTokenLicense>, MockUsbTokenRepository>();
+            services.AddAutoMapper(System.Reflection.Assembly.GetExecutingAssembly());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

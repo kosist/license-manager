@@ -58,7 +58,6 @@ namespace LicenseManagerWeb.Controllers
                 }
                 else
                     _licenseRepo.Update(license);
-                //return RedirectToAction("Details", "Licenses", new { id = license.Id });
                 return RedirectToAction("Index");
             }
             else

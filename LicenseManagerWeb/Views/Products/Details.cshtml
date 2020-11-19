@@ -37,27 +37,27 @@
                 </li>
             </ul>
         </div>
-            <div class="col-md-6 mb-4 order-md-2">
-                <h4 class="d-flex justify-content-between align-items-center">
-                    <span class="text-muted">Links</span>
-                </h4>
-                <ul class="list-group">
-                    <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.SourceCodeLocation">@Model.ProductMetadata.SourceCodeLocation</a></li>
-                    <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.SharePointLink">@Model.ProductMetadata.SharePointLink</a></li>
-                    <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.EasyProjectLink">@Model.ProductMetadata.EasyProjectLink</a></li>
-                    <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.SmartSheetLink">@Model.ProductMetadata.SmartSheetLink</a></li>
-                </ul>
-            </div>
+        <div class="col-md-6 mb-4 order-md-2">
+            <h4 class="d-flex justify-content-between align-items-center">
+                <span class="text-muted">Links</span>
+            </h4>
+            <ul class="list-group">
+                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.SourceCodeLocation">@Model.ProductMetadata.SourceCodeLocation</a></li>
+                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.SharePointLink">@Model.ProductMetadata.SharePointLink</a></li>
+                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.EasyProjectLink">@Model.ProductMetadata.EasyProjectLink</a></li>
+                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.SmartSheetLink">@Model.ProductMetadata.SmartSheetLink</a></li>
+            </ul>
         </div>
-
-        @if (Model.License is UsbTokenLicense)
-        {
-            <partial name="../Licenses/_UsbToken" model="Model.License" />
-        }
-        <partial name="_EmergencyKey" model="Model.EmergencyKey" />
-        
-        <partial name="_ViProtectionInfo" model="Model.ViProtectionInfo" />
-
     </div>
+
+    @if (Model.License is UsbTokenLicense)
+        {
+            <partial name="../Licenses/_UsbToken" model="Model.License" id="usbTokenView" />
+        }
+    <partial name="_EmergencyKey" model="Model.EmergencyKey" />
+
+    <partial name="_ViProtectionInfo" model="Model.ViProtectionInfo" />
+
+</div>
 
 

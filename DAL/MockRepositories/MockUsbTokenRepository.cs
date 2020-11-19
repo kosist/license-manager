@@ -25,6 +25,18 @@ namespace DAL.MockRepositories
                 UsbTokenApi = new UsbTokenApi(),
             };
             Insert(token);
+            var token1 = new UsbTokenLicense
+            {
+                Id = 2,
+                Name = "USB Token 02",
+                SerialNumber = "22222",
+                IssueDate = DateTime.Now,
+                IssuedBy = new User { Name = "Dummy Name", Surname = "Dummy Surname" },
+                K0 = "9999 1111 2222 3333",
+                K1 = "6666 5555 6666 7777",
+                UsbTokenApi = new UsbTokenApi(),
+            };
+            Insert(token1);
         }
     }
 }

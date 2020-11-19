@@ -10,15 +10,13 @@ namespace LicenseManagerWeb.ViewModels
 {
     public class SwProductViewModel
     {
-        public Product SwProduct { get; set; }
+        public SwProductViewDto SwProduct { get; set; }
         public List<UsbTokensListDto> UsbTokens { get; private set; }
-        public UsbTokensListDto UsbTokensListDto { get; set; }
 
         public SwProductViewModel()
         {            
-            SwProduct = new Product
+            SwProduct = new SwProductViewDto
             {
-                License = new License(),
                 EmergencyKey = new EmergencyKey(),
                 ProductMetadata = new ProductMeta(),
                 ViProtectionInfo = new List<ViProtection>(),

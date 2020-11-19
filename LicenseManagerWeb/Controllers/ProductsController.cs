@@ -1,6 +1,8 @@
 ﻿using System;
+using AutoMapper;
 using DAL.Repositories;
 using Domain;
+using LicenseManagerWeb.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using LicenseManagerWeb.ViewModels;
 
@@ -10,11 +12,15 @@ namespace LicenseManagerWeb.Controllers
     {
         private IProductRepository _productRepo;
         private ILicenseRepository<UsbTokenLicense> _licenseRepo;
+        private IMapper _mapper;
 
-        public ProductsController(IProductRepository productRepo, ILicenseRepository<UsbTokenLicense> licenseRepo)
+        public ProductsController(IProductRepository productRepo,
+                                  ILicenseRepository<UsbTokenLicense> licenseRepo,
+                                  IMapper mapper)
         {
             _productRepo = productRepo;
             _licenseRepo = licenseRepo;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -44,17 +50,28 @@ namespace LicenseManagerWeb.Controllers
             {
                 return NotFound();
             }
-            productViewModel.SwProduct = product;
+
+            productViewModel.SwProduct = _mapper.Map<SwProductViewDto>(product);
             return View(productViewModel);
         }
 
         [HttpPost]
         public IActionResult Edit(SwProductViewModel product)
         {
+            
             if (ModelState.IsValid)
             {
-                _productRepo.Update(product.SwProduct);
-                return RedirectToAction("Details", "Products", new { id = product.SwProduct.Id });
+                var newLicense = _licenseRepo.GetById(product.SwProduct.LicenseId);
+                var swProduct = _mapper.Map<Product>(product.SwProduct);
+                if (newLicense != null)
+                    swProduct.License = newLicense;
+                if (_productRepo.GetById(product.SwProduct.Id) == null)
+                {
+                    _productRepo.Insert(swProduct);
+                }
+                else
+                    _productRepo.Update(swProduct);
+                return RedirectToAction("Index", "Products");
             }
             else
             {

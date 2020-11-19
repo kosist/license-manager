@@ -55,8 +55,8 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="UsbTokens" class="control-label"></label>
-                <select asp-for="UsbTokensListDto"
+                <label asp-for="SwProduct.LicenseId" class="control-label"></label>
+                <select asp-for="SwProduct.LicenseId"
                         asp-items="@(new SelectList(Model.UsbTokens,"Id","Label"))">
                 </select>
                 <span asp-validation-for="UsbTokens" class="text-danger"></span>
