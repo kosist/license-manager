@@ -25,6 +25,11 @@ namespace DAL.MockRepositories
 
         public void Insert(TDomain item)
         {
+            if (item.Id == 0)
+            {
+                var newId = items[items.Count-1].Id + 1;
+                item.Id = newId;
+            }
             items.Add(item);
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DAL.Repositories;
 using Domain;
+using LicenseManagerWeb.ViewModels;
 
 namespace LicenseManagerWeb.Controllers
 {
@@ -34,7 +35,8 @@ namespace LicenseManagerWeb.Controllers
         {
             if (id == null)
             {
-                return View(new UsbTokenLicense());
+                var usbTokenViewModel = new UsbTokenViewModel();
+                return View(usbTokenViewModel.UsbToken);
             }
 
             var license = _licenseRepo.GetById(id);
@@ -50,8 +52,14 @@ namespace LicenseManagerWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _licenseRepo.Update(license);
-                return RedirectToAction("Details", "Licenses", new { id = license.Id });
+                if (_licenseRepo.GetById(license.Id) == null)
+                {
+                    _licenseRepo.Insert(license);
+                }
+                else
+                    _licenseRepo.Update(license);
+                //return RedirectToAction("Details", "Licenses", new { id = license.Id });
+                return RedirectToAction("Index");
             }
             else
             {
