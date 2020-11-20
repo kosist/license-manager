@@ -17,7 +17,6 @@ namespace LicenseManagerWeb.ViewModels
         {            
             SwProduct = new SwProductViewDto
             {
-                EmergencyKey = new EmergencyKey(),
                 ProductMetadata = new ProductMeta(),
                 ViProtectionInfo = new List<ViProtection>(),
                 ProductChanges = new List<ProductChange>(),
