@@ -20,6 +20,7 @@ namespace LicenseManagerWeb.DTOs
         [DisplayName("USB Token")]
         [Required]
         public int LicenseId { get; set; }
+        public EmergencyKey EmergencyKey { get; set; }
 
         [Required]
         public string Version { get; set; }
