@@ -1,8 +1,8 @@
 ﻿$("#btn-edit-emergency-key").click(function () {
     $.ajax({
-        url: "Products/EditEmergencyKey",
+        url: "Products/EditEmergencyKey/1",
         type: "get",
-        data: $("form").serialize(), //if you need to post Model data, use this
+        contentType: "json",
         success: function (result) {
             $("#emergencyKey").html(result);
         }

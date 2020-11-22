@@ -6,7 +6,9 @@
     <div class="row">
         <div class="col-md-6 order-md-1">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="SwProduct.Id" />
+            <input type="hidden" asp-for="SwProduct.Id" id="productId" />
+            <input type="hidden" asp-for="SwProduct.EmergencyKey.Key" id="productEmergencyKeyValue" />
+            <input type="hidden" asp-for="SwProduct.EmergencyKey.ExecutionIntervalMinutes" id="productEmergencyKeyInterval" />
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Product Information</span>
             </h4>
@@ -65,19 +67,31 @@
     </div>
     @if (Model.SwProduct.EmergencyKey == null)
     {
-        <a asp-controller="Products" asp-action="AddEmergencyKey" class="btn btn-primary mb-1" id="btn-add-emergency-key">Add Emergency Key</a>
+        <a class="btn btn-primary mb-1" id="btn-add-emergency-key">Add Emergency Key</a>
     }
     else
     {
-        <a class="btn btn-primary mb-1" id="btn-edit-emergency-key">Edit Emergency Key</a>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="hidden" asp-for="SwProduct.EmergencyKey.Id" id="emergencyKeyId" />
+                <div class="form-group">
+                    <label asp-for="SwProduct.EmergencyKey.Key" class="control-label"></label>
+                    <input asp-for="SwProduct.EmergencyKey.Key" class="form-control" id="emergencyKeyValue" />
+                    <span asp-validation-for="SwProduct.EmergencyKey.Key" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SwProduct.EmergencyKey.ExecutionIntervalMinutes" class="control-label"></label>
+                    <input asp-for="SwProduct.EmergencyKey.ExecutionIntervalMinutes" class="form-control" id="emergencyKeyInterval" />
+                    <span asp-validation-for="SwProduct.EmergencyKey.ExecutionIntervalMinutes" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
     }
-    <div class="form-group" id="emergencyKey">
-        <partial name="../Products/_EmergencyKey" model="@Model.SwProduct.EmergencyKey" />
-    </div>
+
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" id="btn-saveProduct" />
             </div>
         </div>
     </div>
@@ -90,4 +104,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<script src="~/js/EmergencyKeyEdit.js"></script>

@@ -50,6 +50,7 @@ namespace LicenseManagerWeb.Controllers
         [HttpPost]
         public IActionResult Edit(UsbTokenLicense license)
         {
+            var reff = Request.Headers["Referer"].ToString();
             if (ModelState.IsValid)
             {
                 if (_licenseRepo.GetById(license.Id) == null)

@@ -1,0 +1,26 @@
+﻿@model EmergencyKeyDto
+
+<h4>EmergencyKey</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @*<form asp-action="EditEmergencyKey">*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Key" class="control-label"></label>
+                <input asp-for="Key" class="form-control" id="emergencyKeyValue" />
+                <span asp-validation-for="Key" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExecutionIntervalMinutes" class="control-label"></label>
+                <input asp-for="ExecutionIntervalMinutes" class="form-control" id="emergencyKeyInterval" />
+                <span asp-validation-for="ExecutionIntervalMinutes" class="text-danger"></span>
+            </div>
+        @*</form>*@
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
