@@ -12,5 +12,8 @@ namespace Domain
 
         [DisplayName("Execution interval, min.")]
         public int ExecutionIntervalMinutes { get; set; }
+
+        [DisplayName("Is Active?")]
+        public bool Active { get; set; }
     }
 }

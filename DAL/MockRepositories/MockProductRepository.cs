@@ -21,6 +21,7 @@ namespace DAL.MockRepositories
             var product = new Product
             {
                 Id = 1,
+                ProductId = 1,
                 Name = "Dummy SW Product 00",
                 Version = "Version 00.00",
                 ProductMetadata = new ProductMeta
@@ -36,7 +37,8 @@ namespace DAL.MockRepositories
                 {
                     Id = 1,
                     Key = "12345",
-                    ExecutionIntervalMinutes = 30
+                    ExecutionIntervalMinutes = 30,
+                    Active = true,
                 },
                 ViProtectionInfo = viProtection,
             };
