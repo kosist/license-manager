@@ -52,6 +52,7 @@ namespace LicenseManagerWeb.Controllers
             }
 
             productViewModel.SwProduct = _mapper.Map<SwProductViewDto>(product);
+            productViewModel.SwProduct.EmergencyKey = product.EmergencyKey;
             return View(productViewModel);
         }
 

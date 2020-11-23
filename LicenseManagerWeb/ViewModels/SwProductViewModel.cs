@@ -12,6 +12,7 @@ namespace LicenseManagerWeb.ViewModels
     {
         public SwProductViewDto SwProduct { get; set; }
         public List<UsbTokensListDto> UsbTokens { get; private set; }
+        public EmergencyKey EmergencyKey { get; set; }
 
         public SwProductViewModel()
         {            
