@@ -16,8 +16,10 @@ namespace DAL.MockRepositories
 
         private void CreateProductsList()
         {
-            var viProtection = new List<ViProtection>();
-            viProtection.Add(new ViProtection{Id = 1, Description = "VI 01", Password = "123456789"});
+            var viProtection = new List<ViProtection>
+            {
+                new ViProtection {Id = 1, Description = "VI 01", Password = "123456789"}
+            };
             var product = new Product
             {
                 Id = 1,

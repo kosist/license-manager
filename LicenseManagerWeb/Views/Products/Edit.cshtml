@@ -91,6 +91,26 @@
     </div>
 </form>
 
+<div class="row" id="viProtectionInfoDiv">
+    <partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />
+</div>
+
+<form method="post" data-ajax="true" data-ajax-method="post" data-ajax-url="/Products/AddViProtectionInfo" data-ajax-update="#viProtectionInfoDiv">
+    <div class="form-group">
+        <label asp-for="ViProtection.Description" class="control-label"></label>
+        <input asp-for="ViProtection.Description" class="form-control" />
+        <span asp-validation-for="ViProtection.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ViProtection.Password" class="control-label"></label>
+        <input asp-for="ViProtection.Password" class="form-control" />
+        <span asp-validation-for="ViProtection.Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save Protection Info" class="btn btn-primary"/>
+    </div>
+</form>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
@@ -104,13 +124,13 @@
             if (checkBox.checked == true) {
                 $("#div-key-key").removeClass('text-muted');
                 $("#div-key-interval").removeClass('text-muted');
-                $("#emergencyKeyValue").prop("disabled", false);
-                $("#emergencyKeyInterval").prop("disabled", false);
+                $("#emergencyKeyValue").removeAttr('readonly');
+                $("#emergencyKeyInterval").removeAttr('readonly');
             } else {
                 $("#div-key-key").addClass('text-muted');
                 $("#div-key-interval").addClass('text-muted');
-                $("#emergencyKeyValue").prop("disabled", true);
-                $("#emergencyKeyInterval").prop("disabled", true);
+                $("#emergencyKeyValue").attr('readonly', true);
+                $("#emergencyKeyInterval").attr('readonly', true);
             }
         }
     </script>

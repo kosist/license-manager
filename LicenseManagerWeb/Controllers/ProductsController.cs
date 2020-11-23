@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using DAL.Repositories;
 using Domain;
@@ -52,7 +53,6 @@ namespace LicenseManagerWeb.Controllers
             }
 
             productViewModel.SwProduct = _mapper.Map<SwProductViewDto>(product);
-            productViewModel.SwProduct.EmergencyKey = product.EmergencyKey;
             return View(productViewModel);
         }
 
@@ -78,6 +78,18 @@ namespace LicenseManagerWeb.Controllers
             {
                 return ValidationProblem();
             }
+        }
+
+        public IActionResult AddViProtectionInfo(ViProtectionInfoViewModel newInfo)
+        {
+            var protectionList = new List<ViProtection>();
+            protectionList.Add(new ViProtection
+            {
+                Id = 1,
+                Description = newInfo.Description,
+                Password = newInfo.Password
+            });
+            return PartialView("_ViProtectionInfo", protectionList);
         }
     }
 }
