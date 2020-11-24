@@ -82,10 +82,9 @@ namespace LicenseManagerWeb.Controllers
 
         public IActionResult AddViProtectionInfo(ViProtectionInfoViewModel newInfo)
         {
-            var protectionList = new List<ViProtection>();
+            var protectionList = _productRepo.GetById(newInfo.ProductId).ViProtectionInfo;
             protectionList.Add(new ViProtection
             {
-                Id = 1,
                 Description = newInfo.Description,
                 Password = newInfo.Password
             });
