@@ -80,6 +80,7 @@ namespace LicenseManagerWeb.Controllers
             }
         }
 
+        [HttpPost]
         public IActionResult AddViProtectionInfo(ViProtectionInfoViewModel newInfo)
         {
             var protectionList = _productRepo.GetById(newInfo.ProductId).ViProtectionInfo;
