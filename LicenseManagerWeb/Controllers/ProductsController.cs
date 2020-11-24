@@ -33,8 +33,11 @@ namespace LicenseManagerWeb.Controllers
         {
             if (id < 0)
                 throw new ArgumentOutOfRangeException("Id", "Product id is less than 0");
+            var swProductView = new SwProductDetailsViewModel();
             var product = _productRepo.GetById(id);
-            return View(product);
+            swProductView.SwProduct = product;
+            swProductView.ViProtectionViewModel = new ViProtectionInfoViewModel();
+            return View(swProductView);
         }
 
         public IActionResult Edit(int? id)

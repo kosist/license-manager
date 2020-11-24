@@ -1,12 +1,12 @@
-﻿@model Product
+﻿@model SwProductDetailsViewModel
 
 @{
-    ViewBag.Title = Model.Name + " Details";
+    ViewBag.Title = Model.SwProduct.Name + " Details";
     Layout = "_Layout";
 }
 
 <div class="container">
-    <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mb-1">Edit Product</a>
+    <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.SwProduct.Id" class="btn btn-primary mb-1">Edit Product</a>
 </div>
 
 
@@ -16,23 +16,24 @@
             <h4 class="d-flex justify-content-between align-items-center">
                 <span class="text-muted">Details</span>
             </h4>
+            <input type="hidden" asp-for="SwProduct.Id" id="productId" />
             <ul class="list-group">
                 <li class="list-group-item d-flex">
                     <div>
-                        <label asp-for="ProductId" class="text-muted"></label>
-                        <h6 class="my-0">@Model.ProductId</h6>
+                        <label asp-for="SwProduct.ProductId" class="text-muted"></label>
+                        <h6 class="my-0">@Model.SwProduct.ProductId</h6>
                     </div>
                 </li>
                 <li class="list-group-item d-flex">
                     <div>
-                        <label asp-for="Name" class="text-muted"></label>
-                        <h6 class="my-0">@Model.Name</h6>
+                        <label asp-for="SwProduct.Name" class="text-muted"></label>
+                        <h6 class="my-0">@Model.SwProduct.Name</h6>
                     </div>
                 </li>
                 <li class="list-group-item d-flex">
                     <div>
-                        <label asp-for="Version" class="text-muted"></label>
-                        <h6 class="my-0">@Model.Version</h6>
+                        <label asp-for="SwProduct.Version" class="text-muted"></label>
+                        <h6 class="my-0">@Model.SwProduct.Version</h6>
                     </div>
                 </li>
             </ul>
@@ -42,22 +43,86 @@
                 <span class="text-muted">Links</span>
             </h4>
             <ul class="list-group">
-                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.SourceCodeLocation">@Model.ProductMetadata.SourceCodeLocation</a></li>
-                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.SharePointLink">@Model.ProductMetadata.SharePointLink</a></li>
-                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.EasyProjectLink">@Model.ProductMetadata.EasyProjectLink</a></li>
-                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.ProductMetadata.SmartSheetLink">@Model.ProductMetadata.SmartSheetLink</a></li>
+                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.SourceCodeLocation">@Model.SwProduct.ProductMetadata.SourceCodeLocation</a></li>
+                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.SharePointLink">@Model.SwProduct.ProductMetadata.SharePointLink</a></li>
+                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.EasyProjectLink">@Model.SwProduct.ProductMetadata.EasyProjectLink</a></li>
+                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.SmartSheetLink">@Model.SwProduct.ProductMetadata.SmartSheetLink</a></li>
             </ul>
         </div>
     </div>
 
-    @if (Model.License is UsbTokenLicense)
-        {
-            <partial name="../Licenses/_UsbToken" model="Model.License"/>
-        }
-    <partial name="_EmergencyKey" model="Model.EmergencyKey" />
+    @if (Model.SwProduct.License is UsbTokenLicense)
+    {
+        <partial name="../Licenses/_UsbToken" model="Model.SwProduct.License" />
+    }
 
-    <partial name="_ViProtectionInfo" model="Model.ViProtectionInfo" />
+    <partial name="_EmergencyKey" model="Model.SwProduct.EmergencyKey" />
 
+    @*<partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />*@
+
+    <div class="row">
+        <div class="col-md-6 mb-4 order-md-1" id="viProtectionInfoDiv">
+            <partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />
+        </div>
+        <div class="col-md-6 mb-4 order-md-2">
+            <h4 class="d-flex justify-content-between align-items-center">
+                <span class="text-muted">Update information</span>
+            </h4>
+            <form id="form-viProtectionInfo">
+                <div class="form-group">
+                    <label asp-for="ViProtectionViewModel.Description" class="control-label"></label>
+                    <input asp-for="ViProtectionViewModel.Description" class="form-control" id="viProtectionDescription" />
+                    <span asp-validation-for="ViProtectionViewModel.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ViProtectionViewModel.Password" class="control-label"></label>
+                    <input asp-for="ViProtectionViewModel.Password" class="form-control" id="viProtectionPassword" />
+                    <span asp-validation-for="ViProtectionViewModel.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Save Protection Info" class="btn btn-primary" id="btn-submitViProtectionInfo" />
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+            $(function () {
+                $('#btn-submitViProtectionInfo').click(function () {
+                    if ($("#form-viProtectionInfo").valid()) {
+                        $('#form-viProtectionInfo').submit();
+                    }
+                    else {
+                        return false;
+                    }
+                });
+
+                $("#form-viProtectionInfo").on("submit", function (event) {
+                    event.preventDefault();
+                    $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AddViProtectionInfo", "Products")',
+                    dataType: "html",
+                    data: {
+                        Description: $('#viProtectionDescription').val(),
+                        Password: $('#viProtectionPassword').val(),
+                        ProductId: $('#productId').val()
+                    },
+                    success: successFunc,
+                    error: errorFunc
+                    });
+                    function successFunc(data, status) {
+                        $("#viProtectionInfoDiv").html(data);
+                    };
+                    function errorFunc() {
+                        alert('error');
+                    };
+                });
+            })
+    </script>
+}
 
 

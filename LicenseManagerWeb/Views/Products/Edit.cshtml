@@ -93,31 +93,7 @@
 
 <hr />
 
-<div class="row">
-    <div class="col-md-6 mb-4 order-md-1" id="viProtectionInfoDiv">
-        <partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />
-    </div>
-    <div class="col-md-6 mb-4 order-md-2">
-        <h4 class="d-flex justify-content-between align-items-center">
-            <span class="text-muted">Update information</span>
-        </h4>
-        <form id="form-viProtectionInfo">
-            <div class="form-group">
-                <label asp-for="ViProtection.Description" class="control-label"></label>
-                <input asp-for="ViProtection.Description" class="form-control" id="viProtectionDescription" />
-                <span asp-validation-for="ViProtection.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ViProtection.Password" class="control-label"></label>
-                <input asp-for="ViProtection.Password" class="form-control" id="viProtectionPassword" />
-                <span asp-validation-for="ViProtection.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="button" value="Save Protection Info" class="btn btn-primary" id="btn-submitViProtectionInfo" />
-            </div>
-        </form>
-    </div>
-</div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

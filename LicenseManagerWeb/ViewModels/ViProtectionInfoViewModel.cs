@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Domain;
+using System.Collections.Generic;
 
 namespace LicenseManagerWeb.ViewModels
 {
