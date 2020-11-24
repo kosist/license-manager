@@ -67,6 +67,8 @@ namespace LicenseManagerWeb.Controllers
             {
                 var newLicense = _licenseRepo.GetById(product.SwProduct.LicenseId);
                 var swProduct = _mapper.Map<Product>(product.SwProduct);
+                var viProtectionInfo = _productRepo.GetById(product.SwProduct.Id).ViProtectionInfo;
+                swProduct.ViProtectionInfo = viProtectionInfo;
                 if (newLicense != null)
                     swProduct.License = newLicense;
                 if (_productRepo.GetById(product.SwProduct.Id) == null)
@@ -92,6 +94,14 @@ namespace LicenseManagerWeb.Controllers
                 Description = newInfo.Description,
                 Password = newInfo.Password
             });
+            return PartialView("_ViProtectionInfo", protectionList);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveViProtectionInfo(int productId, int itemId)
+        {
+            var protectionList = _productRepo.GetById(productId).ViProtectionInfo;
+            protectionList.RemoveAt(itemId);
             return PartialView("_ViProtectionInfo", protectionList);
         }
     }

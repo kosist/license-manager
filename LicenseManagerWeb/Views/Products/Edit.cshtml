@@ -117,37 +117,5 @@
                 $("#emergencyKeyInterval").attr('readonly', true);
             }
         };
-            $(function () {
-                $('#btn-submitViProtectionInfo').click(function () {
-                    if ($("#form-viProtectionInfo").valid()) {
-                        $('#form-viProtectionInfo').submit();
-                    }
-                    else {
-                        return false;
-                    }
-                });
-
-                $("#form-viProtectionInfo").on("submit", function (event) {
-                    event.preventDefault();
-                    $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("AddViProtectionInfo", "Products")',
-                    dataType: "html",
-                    data: {
-                        Description: $('#viProtectionDescription').val(),
-                        Password: $('#viProtectionPassword').val(),
-                        ProductId: $('#productId').val()
-                    },
-                    success: successFunc,
-                    error: errorFunc
-                    });
-                    function successFunc(data, status) {
-                        $("#viProtectionInfoDiv").html(data);
-                    };
-                    function errorFunc() {
-                        alert('error');
-                    };
-                });
-            })
     </script>
 }

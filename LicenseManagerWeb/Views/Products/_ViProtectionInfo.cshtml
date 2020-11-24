@@ -15,9 +15,11 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Password)
                 </th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
+            @{ var index = 0;}
             @foreach (var item in Model)
             {
                 <tr>
@@ -27,7 +29,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Password)
                     </td>
+                    <td>
+                        <a asp-action="RemoveViProtectionInfo" asp-route-itemId="@index" asp-route-productId="1">Remove</a>
+                    </td>
                 </tr>
+                index++;
             }
             </tbody>
         </table>
