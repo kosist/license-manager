@@ -30,7 +30,13 @@
                         @Html.DisplayFor(modelItem => item.Password)
                     </td>
                     <td>
-                        <a asp-action="RemoveViProtectionInfo" asp-route-itemId="@index" asp-route-productId="1">Remove</a>
+                        <form asp-action="RemoveViProtectionInfo" asp-route-id="@index" asp-route-productId="1" 
+                              data-ajax="true"
+                              data-ajax-update="#viProtectionInfoDiv">
+                            <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                                Delete
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 index++;
