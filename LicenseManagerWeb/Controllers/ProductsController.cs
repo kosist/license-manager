@@ -98,7 +98,7 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult RemoveViProtectionInfo(int productId, int itemId)
+        public IActionResult RemoveViProtectionInfo(int itemId, int productId)
         {
             var protectionList = _productRepo.GetById(productId).ViProtectionInfo;
             protectionList.RemoveAt(itemId);

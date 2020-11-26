@@ -8,39 +8,39 @@
     <div class="col-md-12 mb-4">
         <table class="table">
             <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Password)
-                </th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            @{ var index = 0;}
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Password)
-                    </td>
-                    <td>
-                        <form asp-action="RemoveViProtectionInfo" asp-route-id="@index" asp-route-productId="1" 
-                              data-ajax="true"
-                              data-ajax-update="#viProtectionInfoDiv">
-                            <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                index++;
-            }
+                @{ var index = 0;}
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            <form asp-action="RemoveViProtectionInfo" asp-route-id="@index" asp-route-productId="1"
+                                  data-ajax="true"
+                                  data-ajax-update="#viProtectionInfoDiv">
+                                <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    index++;
+                }
             </tbody>
         </table>
     </div>
