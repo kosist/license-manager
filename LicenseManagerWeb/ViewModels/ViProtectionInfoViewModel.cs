@@ -6,9 +6,9 @@ namespace LicenseManagerWeb.ViewModels
 {
     public class ViProtectionInfoViewModel
     {
-        [Required]
+        //[Required]
         public string Description { get; set; }
-        [Required]
+        //[Required]
         public string Password { get; set; }
         public int ProductId { get; set; }
     }

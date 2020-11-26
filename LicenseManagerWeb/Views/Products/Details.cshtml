@@ -57,70 +57,14 @@
     }
 
     <partial name="_EmergencyKey" model="Model.SwProduct.EmergencyKey" />
+    <partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />
 
-    <div class="row">
-        <div class="col-md-8 mb-4 order-md-1" id="viProtectionInfoDiv">
-              <partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />
-        </div>
-        <div class="col-md-4 mb-4 order-md-2">
-            <h4 class="d-flex justify-content-between align-items-center">
-                <span class="text-muted">Update information</span>
-            </h4>
-            <form id="form-viProtectionInfo">
-                <div class="form-group">
-                    <label asp-for="ViProtectionViewModel.Description" class="control-label"></label>
-                    <input asp-for="ViProtectionViewModel.Description" class="form-control" id="viProtectionDescription" />
-                    <span asp-validation-for="ViProtectionViewModel.Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ViProtectionViewModel.Password" class="control-label"></label>
-                    <input asp-for="ViProtectionViewModel.Password" class="form-control" id="viProtectionPassword" />
-                    <span asp-validation-for="ViProtectionViewModel.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="button" value="Save Protection Info" class="btn btn-primary" id="btn-submitViProtectionInfo" />
-                </div>
-            </form>
-        </div>
-    </div>
+
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script type="text/javascript">
-            $(function () {
-                $('#btn-submitViProtectionInfo').click(function () {
-                    if ($("#form-viProtectionInfo").valid()) {
-                        $('#form-viProtectionInfo').submit();
-                    }
-                    else {
-                        return false;
-                    }
-                });
 
-                $("#form-viProtectionInfo").on("submit", function (event) {
-                    event.preventDefault();
-                    $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("AddViProtectionInfo", "Products")',
-                    dataType: "html",
-                    data: {
-                        Description: $('#viProtectionDescription').val(),
-                        Password: $('#viProtectionPassword').val(),
-                        ProductId: $('#productId').val()
-                    },
-                    success: successFunc,
-                    error: errorFunc
-                    });
-                    function successFunc(data, status) {
-                        $("#viProtectionInfoDiv").html(data);
-                    };
-                    function errorFunc() {
-                        alert('error');
-                    };
-                });
-            })
-    </script>
 }
 
 

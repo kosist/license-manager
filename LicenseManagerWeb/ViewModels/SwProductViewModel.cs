@@ -13,6 +13,8 @@ namespace LicenseManagerWeb.ViewModels
         public SwProductViewDto SwProduct { get; set; }
         public List<UsbTokensListDto> UsbTokens { get; private set; }
 
+        public ViProtectionInfoViewModel ViProtectionViewModel { get; set; }
+
         public SwProductViewModel()
         {            
             SwProduct = new SwProductViewDto
@@ -22,6 +24,7 @@ namespace LicenseManagerWeb.ViewModels
                 ViProtectionInfo = new List<ViProtection>(),
                 ProductChanges = new List<ProductChange>(),
             };
+            ViProtectionViewModel = new ViProtectionInfoViewModel();
         }
 
         public void PopulateTokensList(ILicenseRepository<UsbTokenLicense> tokensRepo)
