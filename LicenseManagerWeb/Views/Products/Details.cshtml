@@ -51,13 +51,19 @@
         </div>
     </div>
 
+    <partial name="_EmergencyKey" model="Model.SwProduct.EmergencyKey" />
+
     @if (Model.SwProduct.License is UsbTokenLicense)
     {
         <partial name="../Licenses/_UsbToken" model="Model.SwProduct.License" />
     }
 
-    <partial name="_EmergencyKey" model="Model.SwProduct.EmergencyKey" />
-    <partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />
+    @if (Model.SwProduct.Id != 0)
+    {
+        <a asp-controller="Products" asp-action="EditViProtection" asp-route-productId="@Model.SwProduct.Id" class="btn btn-primary mb-1">Edit VIs Protection Information</a>
+        <partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />
+    }
+
 
 
 </div>

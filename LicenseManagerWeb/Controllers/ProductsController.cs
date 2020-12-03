@@ -85,8 +85,14 @@ namespace LicenseManagerWeb.Controllers
             }
         }
 
+        public IActionResult EditViProtection(int productId)
+        {
+            var protectionList = _productRepo.GetById(productId).ViProtectionInfo;
+            return View("_ViProtectionInfo", protectionList);
+        }
+        
         [HttpPost]
-        public IActionResult AddViProtectionInfo(ViProtectionInfoViewModel newInfo)
+        public IActionResult EditViProtection(ViProtectionInfoViewModel newInfo)
         {
             var protectionList = _productRepo.GetById(newInfo.ProductId).ViProtectionInfo;
             protectionList.Add(new ViProtection
