@@ -17,6 +17,8 @@ namespace LicenseManagerWeb.ViewModels
         public ViProtectionInfoViewModel()
         {
             ViProtectionList = new List<ViProtection>();
+            Description = "";
+            Password = "";
         }
     }
 }

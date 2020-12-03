@@ -88,27 +88,45 @@ namespace LicenseManagerWeb.Controllers
         public IActionResult EditViProtection(int productId)
         {
             var protectionList = _productRepo.GetById(productId).ViProtectionInfo;
-            return View("_ViProtectionInfo", protectionList);
+            var viProtectionView = new ViProtectionInfoViewModel
+            {
+                ViProtectionList = protectionList,
+                ProductId = productId
+            };
+            return View(viProtectionView);
         }
         
         [HttpPost]
         public IActionResult EditViProtection(ViProtectionInfoViewModel newInfo)
         {
-            var protectionList = _productRepo.GetById(newInfo.ProductId).ViProtectionInfo;
-            protectionList.Add(new ViProtection
+            var updViProtectionInfo = new ViProtection
             {
                 Description = newInfo.Description,
                 Password = newInfo.Password
-            });
-            return PartialView("_ViProtectionInfo", protectionList);
+            };
+            var product = _productRepo.GetById(newInfo.ProductId);
+            product.ViProtectionInfo.Add(updViProtectionInfo);
+            _productRepo.Update(product);
+            var viProtectionView = new ViProtectionInfoViewModel
+            {
+                ViProtectionList = product.ViProtectionInfo,
+                ProductId = newInfo.ProductId
+            };
+            return View(viProtectionView);
         }
 
         [HttpPost]
         public IActionResult RemoveViProtectionInfo(int itemId, int productId)
         {
-            var protectionList = _productRepo.GetById(productId).ViProtectionInfo;
-            protectionList.RemoveAt(itemId);
-            return PartialView("_ViProtectionInfo", protectionList);
+            var product = _productRepo.GetById(productId);
+            product.ViProtectionInfo.RemoveAt(itemId);
+            _productRepo.Update(product);
+            var viProtectionView = new ViProtectionInfoViewModel
+            {
+                ViProtectionList = product.ViProtectionInfo,
+                ProductId = productId
+            };
+            return View("EditViProtection", viProtectionView);
         }
     }
 }

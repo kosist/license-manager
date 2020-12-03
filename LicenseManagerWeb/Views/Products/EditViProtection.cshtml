@@ -1,0 +1,85 @@
+﻿@model ViProtectionInfoViewModel
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="d-flex justify-content-between align-items-center">
+    <span class="text-muted">Source Code Protection Information</span>
+</h4>
+
+<div class="row" id="#viProtectionInfoDiv">
+    <div class="col-md-12 mb-4">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViProtection.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViProtection.Password)
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @{ var index = 0;}
+            @foreach (var item in Model.ViProtectionList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        <form asp-action="RemoveViProtectionInfo" asp-route-itemId="@index" asp-route-productId="@Model.ProductId">
+                            <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                index++;
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<hr/>
+
+<div class="row">
+    <div class="col-md-4 mb-4 order-md-2">
+        <h4 class="d-flex justify-content-between align-items-center">
+            <span class="text-muted">Update information</span>
+        </h4>
+        <form id="form-viProtectionInfo" asp-controller="Products" asp-action="EditViProtection">
+            <input type="hidden" asp-for="ProductId"/>
+            <input type="hidden" asp-for="ViProtectionList"/>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" id="viProtectionDescription" onchange="onViProtectionInfoChange();"/>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" id="viProtectionPassword" onchange="onViProtectionInfoChange();"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save Protection Info" class="btn btn-primary" id="btn-submitViProtectionInfo"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
