@@ -21,6 +21,7 @@
                     @Html.DisplayNameFor(model => model.ViProtection.Password)
                 </th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +34,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        <a asp-action="EditViProtectionInfo" asp-route-itemId="@index" asp-route-productId="@Model.ProductId" class="btn btn-sm btn-info d-none d-md-inline-block">Edit</a>
                     </td>
                     <td>
                         <form asp-action="RemoveViProtectionInfo" asp-route-itemId="@index" asp-route-productId="@Model.ProductId">

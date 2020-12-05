@@ -128,5 +128,37 @@ namespace LicenseManagerWeb.Controllers
             };
             return View("EditViProtection", viProtectionView);
         }
+
+        public IActionResult EditViProtectionInfo(int itemId, int productId)
+        {
+            var product = _productRepo.GetById(productId);
+            
+            var viProtectionView = new EditViProtectionInfoViewModel
+            {
+                ProductId = productId,
+                Description = product.ViProtectionInfo[itemId].Description,
+                Password = product.ViProtectionInfo[itemId].Password,
+                ItemId = itemId,
+            };
+            return View(viProtectionView);
+        }
+
+        [HttpPost]
+        public IActionResult EditViProtectionInfo(EditViProtectionInfoViewModel viProtectionInfo)
+        {
+            var itemId = viProtectionInfo.ItemId;
+            var product = _productRepo.GetById(viProtectionInfo.ProductId);
+            product.ViProtectionInfo[itemId].Description = viProtectionInfo.Description;
+            product.ViProtectionInfo[itemId].Password = viProtectionInfo.Password;
+            _productRepo.Update(product);
+
+            var viProtectionView = new ViProtectionInfoViewModel
+            {
+                ViProtectionList = product.ViProtectionInfo,
+                ProductId = viProtectionInfo.ProductId
+            };
+            return View("EditViProtection", viProtectionView);
+        }
+
     }
 }
