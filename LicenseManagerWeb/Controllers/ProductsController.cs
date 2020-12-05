@@ -67,8 +67,6 @@ namespace LicenseManagerWeb.Controllers
             {
                 var newLicense = _licenseRepo.GetById(product.SwProduct.LicenseId);
                 var swProduct = _mapper.Map<Product>(product.SwProduct);
-                var viProtectionInfo = _productRepo.GetById(product.SwProduct.Id).ViProtectionInfo;
-                swProduct.ViProtectionInfo = viProtectionInfo;
                 if (newLicense != null)
                     swProduct.License = newLicense;
                 if (_productRepo.GetById(product.SwProduct.Id) == null)

@@ -1,10 +1,10 @@
 ﻿@model UsbTokenLicense
 
-    <h4 class="d-flex justify-content-between align-items-center">
+<a asp-controller="Licenses" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mb-1">Edit Token</a> 
+
+<h4 class="d-flex justify-content-between align-items-center">
         <span class="text-muted">@Model.Name</span>
     </h4>
-
-<a asp-controller="Licenses" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mb-1">Edit Token</a> 
 
     <div class="row">
         <div class="col-md-6 mb-4">

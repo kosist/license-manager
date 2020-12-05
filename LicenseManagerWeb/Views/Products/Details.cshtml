@@ -43,10 +43,22 @@
                 <span class="text-muted">Links</span>
             </h4>
             <ul class="list-group">
-                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.SourceCodeLocation">@Model.SwProduct.ProductMetadata.SourceCodeLocation</a></li>
-                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.SharePointLink">@Model.SwProduct.ProductMetadata.SharePointLink</a></li>
-                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.EasyProjectLink">@Model.SwProduct.ProductMetadata.EasyProjectLink</a></li>
-                <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.SmartSheetLink">@Model.SwProduct.ProductMetadata.SmartSheetLink</a></li>
+                @if (!String.IsNullOrEmpty(Model.SwProduct.ProductMetadata.SourceCodeLocation))
+                {
+                    <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.SourceCodeLocation">@Model.SwProduct.ProductMetadata.SourceCodeLocation</a></li>
+                }
+                @if (!String.IsNullOrEmpty(Model.SwProduct.ProductMetadata.SharePointLink))
+                {
+                    <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.SharePointLink">@Model.SwProduct.ProductMetadata.SharePointLink</a></li>
+                }
+                @if (!String.IsNullOrEmpty(Model.SwProduct.ProductMetadata.EasyProjectLink))
+                 {
+                     <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.EasyProjectLink">@Model.SwProduct.ProductMetadata.EasyProjectLink</a></li>
+                 }
+                @if (!String.IsNullOrEmpty(Model.SwProduct.ProductMetadata.SmartSheetLink))
+                {
+                    <li class="list-group-item d-flex"><a class="nav-link" target="_blank" href="@Model.SwProduct.ProductMetadata.SmartSheetLink">@Model.SwProduct.ProductMetadata.SmartSheetLink</a></li>
+                }
             </ul>
         </div>
     </div>

@@ -27,8 +27,11 @@ namespace DAL.MockRepositories
         {
             if (item.Id == 0)
             {
-                var newId = items[items.Count-1].Id + 1;
-                item.Id = newId;
+                if (items.Count != 0)
+                {
+                    var newId = items[items.Count-1].Id + 1;
+                    item.Id = newId;
+                }
             }
             items.Add(item);
         }
