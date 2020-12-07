@@ -12,7 +12,7 @@ namespace LicenseManagerWeb.ViewModels
         public string Description { get; set; }
         [Required]
         public string Password { get; set; }
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
         public int ItemId { get; set; }          
     }
 }

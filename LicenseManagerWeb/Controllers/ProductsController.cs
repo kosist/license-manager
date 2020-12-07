@@ -29,12 +29,14 @@ namespace LicenseManagerWeb.Controllers
             return View(_productRepo.GetList());
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int? id)
         {
-            if (id < 0)
-                throw new ArgumentOutOfRangeException("Id", "Product id is less than 0");
+            if (id == null)
+                return NotFound();
             var swProductView = new SwProductDetailsViewModel();
             var product = _productRepo.GetById(id);
+            if (product == null)
+                return NotFound();
             swProductView.SwProduct = product;
             swProductView.ViProtectionViewModel = new ViProtectionInfoViewModel();
             return View(swProductView);
@@ -83,9 +85,14 @@ namespace LicenseManagerWeb.Controllers
             }
         }
 
-        public IActionResult EditViProtection(int productId)
+        public IActionResult EditViProtection(int? productId)
         {
-            var protectionList = _productRepo.GetById(productId).ViProtectionInfo;
+            if (productId == null)
+                return NotFound();
+            var product = _productRepo.GetById(productId);
+            if (product == null)
+                return NotFound();
+            var protectionList = product.ViProtectionInfo;
             var viProtectionView = new ViProtectionInfoViewModel
             {
                 ViProtectionList = protectionList,
@@ -102,9 +109,15 @@ namespace LicenseManagerWeb.Controllers
                 Description = newInfo.Description,
                 Password = newInfo.Password
             };
+            if (newInfo.ProductId == null)
+                return NotFound();
             var product = _productRepo.GetById(newInfo.ProductId);
+            if (product == null)
+                return NotFound();
+
             product.ViProtectionInfo.Add(updViProtectionInfo);
             _productRepo.Update(product);
+
             var viProtectionView = new ViProtectionInfoViewModel
             {
                 ViProtectionList = product.ViProtectionInfo,
@@ -114,11 +127,19 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult RemoveViProtectionInfo(int itemId, int productId)
+        public IActionResult RemoveViProtectionInfo(int itemId, int? productId)
         {
+            if (productId == null)
+                return NotFound();
             var product = _productRepo.GetById(productId);
-            product.ViProtectionInfo.RemoveAt(itemId);
-            _productRepo.Update(product);
+            if (product == null)
+                return NotFound();
+
+            if (itemId <= product.ViProtectionInfo.Count - 1)
+            {
+                product.ViProtectionInfo.RemoveAt(itemId);
+                _productRepo.Update(product);
+            }
             var viProtectionView = new ViProtectionInfoViewModel
             {
                 ViProtectionList = product.ViProtectionInfo,
@@ -127,10 +148,17 @@ namespace LicenseManagerWeb.Controllers
             return View("EditViProtection", viProtectionView);
         }
 
-        public IActionResult EditViProtectionInfo(int itemId, int productId)
+        public IActionResult EditViProtectionInfo(int itemId, int? productId)
         {
+            if (productId == null)
+                return NotFound();
             var product = _productRepo.GetById(productId);
-            
+            if (product == null)
+                return NotFound();
+
+            if (itemId < product.ViProtectionInfo.Count - 1)
+                RedirectToAction("Details", product.Id);
+
             var viProtectionView = new EditViProtectionInfoViewModel
             {
                 ProductId = productId,
@@ -145,10 +173,18 @@ namespace LicenseManagerWeb.Controllers
         public IActionResult EditViProtectionInfo(EditViProtectionInfoViewModel viProtectionInfo)
         {
             var itemId = viProtectionInfo.ItemId;
+            if (viProtectionInfo.ProductId == null)
+                return NotFound();
             var product = _productRepo.GetById(viProtectionInfo.ProductId);
-            product.ViProtectionInfo[itemId].Description = viProtectionInfo.Description;
-            product.ViProtectionInfo[itemId].Password = viProtectionInfo.Password;
-            _productRepo.Update(product);
+            if (product == null)
+                return NotFound();
+
+            if (itemId <= product.ViProtectionInfo.Count - 1)
+            {
+                product.ViProtectionInfo[itemId].Description = viProtectionInfo.Description;
+                product.ViProtectionInfo[itemId].Password = viProtectionInfo.Password;
+                _productRepo.Update(product);
+            }
 
             var viProtectionView = new ViProtectionInfoViewModel
             {

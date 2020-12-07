@@ -23,11 +23,14 @@ namespace LicenseManagerWeb.Controllers
             return View(_licenseRepo.GetList());
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int? id)
         {
-            if (id < 0)
-                throw new ArgumentOutOfRangeException("Id", "License id is less than 0");
+            if (id == null)
+                return NotFound();
             var license = _licenseRepo.GetById(id);
+            if (license == null)
+                return NotFound();
+
             return View(license);
         }
 
@@ -50,7 +53,6 @@ namespace LicenseManagerWeb.Controllers
         [HttpPost]
         public IActionResult Edit(UsbTokenLicense license)
         {
-            var reff = Request.Headers["Referer"].ToString();
             if (ModelState.IsValid)
             {
                 if (_licenseRepo.GetById(license.Id) == null)

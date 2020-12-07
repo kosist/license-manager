@@ -10,7 +10,7 @@ namespace LicenseManagerWeb.ViewModels
         public string Description { get; set; }
         [Required]
         public string Password { get; set; }
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
         public List<ViProtection> ViProtectionList { get; set; }
         public ViProtection ViProtection { get; set; }
 
