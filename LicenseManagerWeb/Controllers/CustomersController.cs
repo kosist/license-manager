@@ -23,7 +23,7 @@ namespace LicenseManagerWeb.Controllers
             if (id > 0)
                 return View(_customerRepo.GetById(id));
             else
-                return NotFound()
+                return NotFound();
         }
 
         public IActionResult EditCustomer(int id)

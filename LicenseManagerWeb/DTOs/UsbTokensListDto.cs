@@ -8,6 +8,6 @@ namespace LicenseManagerWeb.DTOs
     public class UsbTokensListDto
     {
         public string Label { get; set; }
-        public int Id { get; set; }
+        public int? Id { get; set; }
     }
 }
