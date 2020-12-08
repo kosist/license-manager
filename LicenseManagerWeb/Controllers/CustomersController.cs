@@ -26,18 +26,18 @@ namespace LicenseManagerWeb.Controllers
                 return NotFound();
         }
 
-        public IActionResult EditCustomer(int id)
+        public IActionResult EditCustomer(int? id)
         {
             var customer = new Customer();
-            if (id > 0)
-            {
-                customer = _customerRepo.GetById(id);
-                if (customer == null)
-                    customer = new Customer();
-            }
-
+            if (id == null)
+                return NotFound();
+            customer = _customerRepo.GetById(id);
+            if (customer == null)
+                return NotFound();
             return View(customer);
         }
+
+        public IActionResult EditCustomer()
 
 
     }
