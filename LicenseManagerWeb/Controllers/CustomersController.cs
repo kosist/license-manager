@@ -30,15 +30,31 @@ namespace LicenseManagerWeb.Controllers
         {
             var customer = new Customer();
             if (id == null)
-                return NotFound();
+                return View(new Customer());
             customer = _customerRepo.GetById(id);
             if (customer == null)
                 return NotFound();
             return View(customer);
         }
 
-        public IActionResult EditCustomer()
-
+        [HttpPost]
+        public IActionResult EditCustomer(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_customerRepo.GetById(customer.Id) == null)
+                {
+                    _customerRepo.Insert(customer);
+                }
+                else
+                    _customerRepo.Update(customer);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return ValidationProblem();
+            }
+        }
 
     }
 }
