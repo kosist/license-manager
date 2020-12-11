@@ -6,8 +6,9 @@ using Domain;
 
 namespace LicenseManagerWeb.ViewModels
 {
-    public class BaseViewModel
+    public class BaseViewModel<TEntity>
+    where TEntity: BaseItem
     {
-        public BaseItem Entity { get; set; }
+        public TEntity Entity { get; set; }
     }
 }

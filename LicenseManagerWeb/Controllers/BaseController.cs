@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Domain;
 using LicenseManagerWeb.ViewModels;
@@ -11,15 +8,20 @@ namespace LicenseManagerWeb.Controllers
 {
     public class BaseController<TDomain, TDetailsViewModel, TEditViewModel, TRepo> : Controller, IBaseController<TDomain, TDetailsViewModel, TEditViewModel, TRepo>
         where TDomain : BaseItem
-        where TDetailsViewModel : BaseViewModel, new()
-        where TEditViewModel : BaseViewModel, new()
-        where TRepo : IGenericItemRepository<BaseItem>
+        where TDetailsViewModel : BaseViewModel<TDomain>, new()
+        where TEditViewModel : BaseViewModel<TDomain>, new()
+        where TRepo : IGenericItemRepository<TDomain>
     {
-        private IGenericItemRepository<BaseItem> _repo;
+        private IGenericItemRepository<TDomain> _repo;
 
-        public BaseController(IGenericItemRepository<BaseItem> repo)
+        public BaseController(IGenericItemRepository<TDomain> repo)
         {
             _repo = repo;
+        }
+
+        public IActionResult Index()
+        {
+            return View(_repo.GetList());
         }
 
         public IActionResult Details(int? id)
@@ -46,11 +48,6 @@ namespace LicenseManagerWeb.Controllers
         public IActionResult Edit(TDomain entity)
         {
             throw new NotImplementedException();
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
     }
 }

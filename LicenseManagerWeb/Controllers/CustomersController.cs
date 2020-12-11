@@ -5,19 +5,19 @@ using LicenseManagerWeb.ViewModels;
 
 namespace LicenseManagerWeb.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomersController : BaseController<Customer, CustomerDetailsViewModel, CustomerDetailsViewModel, ICustomerRepository>
     {
         private ICustomerRepository _customerRepo;
 
-        public CustomersController(ICustomerRepository customerRepo)
+        public CustomersController(ICustomerRepository customerRepo) : base(customerRepo)
         {
             _customerRepo = customerRepo;
         }
 
-        public IActionResult Index()
-        {
-            return View(_customerRepo.GetList());
-        }
+        //public IActionResult Index()
+        //{
+        //    return View(_customerRepo.GetList());
+        //}
 
         public IActionResult EditCustomer(int? id)
         {
@@ -49,21 +49,21 @@ namespace LicenseManagerWeb.Controllers
             }
         }
 
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-                return NotFound();
-            var customer = _customerRepo.GetById(id);
-            if (customer == null)
-                return NotFound();
+        //public IActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //        return NotFound();
+        //    var customer = _customerRepo.GetById(id);
+        //    if (customer == null)
+        //        return NotFound();
 
-            var customerViewModel = new CustomerDetailsViewModel
-            {
-                Customer = customer,
-            };
+        //    var customerViewModel = new CustomerDetailsViewModel
+        //    {
+        //        Customer = customer,
+        //    };
 
-            return View(customerViewModel);
-        }
+        //    return View(customerViewModel);
+        //}
 
     }
 }
