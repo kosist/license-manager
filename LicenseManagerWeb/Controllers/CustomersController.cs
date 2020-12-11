@@ -1,6 +1,7 @@
 ﻿using DAL.Repositories;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
+using LicenseManagerWeb.ViewModels;
 
 namespace LicenseManagerWeb.Controllers
 {
@@ -16,14 +17,6 @@ namespace LicenseManagerWeb.Controllers
         public IActionResult Index()
         {
             return View(_customerRepo.GetList());
-        }
-
-        public IActionResult Details(int id)
-        {
-            if (id > 0)
-                return View(_customerRepo.GetById(id));
-            else
-                return NotFound();
         }
 
         public IActionResult EditCustomer(int? id)
@@ -54,6 +47,22 @@ namespace LicenseManagerWeb.Controllers
             {
                 return ValidationProblem();
             }
+        }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+            var customer = _customerRepo.GetById(id);
+            if (customer == null)
+                return NotFound();
+
+            var customerViewModel = new CustomerDetailsViewModel
+            {
+                Customer = customer,
+            };
+
+            return View(customerViewModel);
         }
 
     }
