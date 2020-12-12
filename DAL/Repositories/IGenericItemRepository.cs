@@ -11,6 +11,6 @@ namespace DAL.Repositories
         TDomain GetById(int? id);
         void Insert(TDomain item);
         void Update(TDomain item);
-        void Delete(int id);
+        void Delete(int? id);
     }
 }

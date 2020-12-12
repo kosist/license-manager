@@ -5,21 +5,21 @@ using LicenseManagerWeb.ViewModels;
 
 namespace LicenseManagerWeb.Controllers
 {
-    public class CustomersController : BaseController<Customer, CustomerDetailsViewModel, CustomerDetailsViewModel, ICustomerRepository>
+    public class CustomersController : Controller
     {
         private ICustomerRepository _customerRepo;
 
-        public CustomersController(ICustomerRepository customerRepo) : base(customerRepo)
+        public CustomersController(ICustomerRepository customerRepo)
         {
             _customerRepo = customerRepo;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View(_customerRepo.GetList());
-        //}
+        public IActionResult Index()
+        {
+            return View(_customerRepo.GetList());
+        }
 
-        public IActionResult EditCustomer(int? id)
+        public IActionResult Edit(int? id)
         {
             var customer = new Customer();
             if (id == null)
@@ -31,7 +31,7 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditCustomer(Customer customer)
+        public IActionResult Edit(Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -49,21 +49,34 @@ namespace LicenseManagerWeb.Controllers
             }
         }
 
-        //public IActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //        return NotFound();
-        //    var customer = _customerRepo.GetById(id);
-        //    if (customer == null)
-        //        return NotFound();
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+            var customer = _customerRepo.GetById(id);
+            if (customer == null)
+                return NotFound();
 
-        //    var customerViewModel = new CustomerDetailsViewModel
-        //    {
-        //        Customer = customer,
-        //    };
+            var customerViewModel = new CustomerDetailsViewModel
+            {
+                Customer = customer,
+            };
 
-        //    return View(customerViewModel);
-        //}
+            return View(customerViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+            var customer = _customerRepo.GetById(id);
+            if (customer == null)
+                return NotFound();
+            else
+                _customerRepo.Delete(id);
+            return RedirectToAction("Index");
+        }
 
     }
 }

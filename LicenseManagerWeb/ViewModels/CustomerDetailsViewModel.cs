@@ -9,8 +9,8 @@ namespace LicenseManagerWeb.ViewModels
     /// <summary>
     /// This view model should be extended with additional parameters to be displayed
     /// </summary>
-    public class CustomerDetailsViewModel : BaseViewModel<Customer>
+    public class CustomerDetailsViewModel
     {
-
+        public Customer Customer { get; set; }
     }
 }

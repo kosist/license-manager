@@ -46,7 +46,7 @@ namespace DAL.MockRepositories
 
         }
 
-        public void Delete(int id)
+        public void Delete(int? id)
         {
             items.RemoveAll(obj => obj.Id == id);
         }

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<a asp-controller="Customers" asp-action="EditCustomer" class="btn btn-primary mb-1" role="button">Add Customer</a>
+<a asp-controller="Customers" asp-action="Edit" class="btn btn-primary mb-1" role="button">Add Customer</a>
 
 <table class="table">
     <thead>
@@ -24,10 +24,10 @@
                 <a asp-controller="Customers" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
             </td>
             <td>
-                <a asp-controller="Customers" asp-action="EditCustomer" asp-route-id="@item.Id" class="btn btn-sm btn-info d-none d-md-inline-block">Edit</a>
+                <a asp-controller="Customers" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info d-none d-md-inline-block">Edit</a>
             </td>
             <td>
-                <form asp-controller="Customers" asp-action="DeleteCustomer" asp-route-id="@item.Id">
+                <form asp-controller="Customers" asp-action="Delete" asp-route-id="@item.Id">
                     <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
                         Delete
                     </button>
