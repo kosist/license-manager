@@ -43,6 +43,7 @@ namespace LicenseManagerWeb
             services.AddSingleton<ICustomerRepository, MockCustomerRepository>();
             services.AddSingleton<IProductRepository, MockProductRepository>();
             services.AddSingleton<ILicenseRepository<UsbTokenLicense>, MockUsbTokenRepository>();
+
             services.AddAutoMapper(System.Reflection.Assembly.GetExecutingAssembly());
         }
 
