@@ -71,7 +71,9 @@ namespace LicenseManagerWeb.Controllers
                 }
                 else
                 {
+                    var customer = _customerRepo.GetById(projectViewModel.Project.CustomerId);
                     existingProject = _mapper.Map<ProjectDto, Project>(projectViewModel.Project);
+                    existingProject.Customer = customer;
                     _projectRepo.Update(existingProject);
                 }
                 
