@@ -55,23 +55,23 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ProjectEditViewModel project)
+        public IActionResult Edit(ProjectEditViewModel projectViewModel)
         {
             if (ModelState.IsValid)
             {
-                var existingProject = _projectRepo.GetById(project.Project.Id);
+                var existingProject = _projectRepo.GetById(projectViewModel.Project.Id);
                 if (existingProject == null)
                 {
                     var newProject = new Project
                     {
-                        Name = project.Project.Name,
-                        Customer = _customerRepo.GetById(project.Project.CustomerId),
+                        Name = projectViewModel.Project.Name,
+                        Customer = _customerRepo.GetById(projectViewModel.Project.CustomerId),
                     };
                     _projectRepo.Insert(newProject);
                 }
                 else
                 {
-                    existingProject = _mapper.Map<ProjectDto, Project>(project.Project);
+                    existingProject = _mapper.Map<ProjectDto, Project>(projectViewModel.Project);
                     _projectRepo.Update(existingProject);
                 }
                 

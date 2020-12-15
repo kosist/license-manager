@@ -16,6 +16,7 @@ namespace LicenseManagerWeb.ViewModels
         public ProjectEditViewModel()
         {
             Customers = new List<Customer>();
+            Project = new ProjectDto();
         }
     }
 }
