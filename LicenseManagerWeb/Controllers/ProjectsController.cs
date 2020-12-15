@@ -95,7 +95,10 @@ namespace LicenseManagerWeb.Controllers
 
             var projectDetailsViewModel = new ProjectDetailsViewModel
             {
-                Project = project,
+                ProjectName = project.Name,
+                CustomerName = project.Customer.Name,
+                SwProjectNames = project.SwProducts?.Select(p => p.Name),
+                ProjectId = project.Id,
             };
 
             return View(projectDetailsViewModel);
