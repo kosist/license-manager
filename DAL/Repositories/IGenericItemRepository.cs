@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Domain;
 
 namespace DAL.Repositories
@@ -7,10 +8,10 @@ namespace DAL.Repositories
                      where TDomain : BaseItem
 
     {
-        IEnumerable<TDomain> GetList();
-        TDomain GetById(int? id);
-        void Insert(TDomain item);
-        void Update(TDomain item);
-        void Delete(int? id);
+        Task<IEnumerable<TDomain>> GetList();
+        Task<TDomain> GetById(int? id);
+        Task Insert(TDomain item);
+        Task Update(TDomain item);
+        Task Delete(int? id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DAL.Repositories;
+using System.Threading.Tasks;
 using Domain;
 
 namespace DAL.MockRepositories
@@ -7,10 +8,10 @@ namespace DAL.MockRepositories
     {
         public MockCustomerRepository() : base()
         {
-            CreateCustomersList();
+            Task.Run(async () => await CreateCustomersList());
         }
 
-        private void CreateCustomersList()
+        private async Task CreateCustomersList()
         {
             var customer1 = new Customer
             {
@@ -20,7 +21,7 @@ namespace DAL.MockRepositories
                 Name = "Dummy customer"
             };
 
-            Insert(customer1);
+            await Insert(customer1);
         }
 
     }

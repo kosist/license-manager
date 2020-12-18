@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DAL.Repositories;
 using Domain;
 
@@ -13,17 +14,17 @@ namespace DAL.MockRepositories
             items = new List<TDomain>();
         }
 
-        public IEnumerable<TDomain> GetList()
+        public async Task<IEnumerable<TDomain>> GetList()
         {
-            return items;
+            return await Task.FromResult(items);
         }
 
-        public TDomain GetById(int? id)
+        public async Task<TDomain> GetById(int? id)
         {
-            return items.Find(obj => obj.Id == id);
+            return await Task.FromResult(items.Find(obj => obj.Id == id));
         }
 
-        public void Insert(TDomain item)
+        public async Task Insert(TDomain item)
         {
             if (item.Id == null)
             {
@@ -37,7 +38,7 @@ namespace DAL.MockRepositories
             items.Add(item);
         }
 
-        public void Update(TDomain item)
+        public async Task Update(TDomain item)
         {
             var oldItem = GetById(item.Id);
             var index = items.IndexOf(oldItem);
@@ -46,7 +47,7 @@ namespace DAL.MockRepositories
 
         }
 
-        public void Delete(int? id)
+        public async Task Delete(int? id)
         {
             items.RemoveAll(obj => obj.Id == id);
         }

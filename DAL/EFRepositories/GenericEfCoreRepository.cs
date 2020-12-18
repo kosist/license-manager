@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 
@@ -15,34 +16,34 @@ namespace DAL.EFRepositories
             _context = context;
         }
 
-        public void Delete(int? id)
+        public async Task Delete(int? id)
         {
-            var entity = _context.Set<TDomain>().Find(id);
+            var entity = await _context.Set<TDomain>().FindAsync(id);
             if (entity == null)
             _context.Set<TDomain>().Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public TDomain GetById(int? id)
+        public async Task<TDomain> GetById(int? id)
         {
-            return _context.Set<TDomain>().Find(id);
+            return await _context.Set<TDomain>().FindAsync(id);
         }
 
-        public IEnumerable<TDomain> GetList()
+        public async Task<IEnumerable<TDomain>> GetList()
         {
-            return _context.Set<TDomain>().ToListAsync().Result;
+            return await _context.Set<TDomain>().ToListAsync();
         }
 
-        public void Insert(TDomain item)
+        public async Task Insert(TDomain item)
         {
             _context.Set<TDomain>().Add(item);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(TDomain item)
+        public async Task Update(TDomain item)
         {
             _context.Entry(item).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

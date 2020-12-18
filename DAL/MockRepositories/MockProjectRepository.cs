@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using DAL.Repositories;
 using Domain;
@@ -9,10 +10,10 @@ namespace DAL.MockRepositories
     {
         public MockProjectRepository() : base()
         {
-            CreateProjectsList();
+            Task.Run(async () => await CreateProjectsList());
         }
 
-        private void CreateProjectsList()
+        private async Task CreateProjectsList()
         {
             var customer = new Customer
             {
@@ -21,12 +22,12 @@ namespace DAL.MockRepositories
             var proj1 = new Project {Id = 1, Customer = customer, Name = "Dummy project 1"};
             var proj2 = new Project {Id = 2, Customer = customer, Name = "Dummy project 2"};
             var proj3 = new Project {Id = 3, Customer = customer, Name = "Dummy project 3"};
-            Insert(proj1);
-            Insert(proj2);
-            Insert(proj3);
+            await Insert(proj1);
+            await Insert(proj2);
+            await Insert(proj3);
         }
 
-        public void AddProductToProject(int projectId, Product product)
+        public Task AddProductToProject(int projectId, Product product)
         {
             throw new System.NotImplementedException();
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using DAL.Repositories;
+using System.Threading.Tasks;
 using Domain;
 
 namespace DAL.MockRepositories
@@ -8,10 +9,10 @@ namespace DAL.MockRepositories
     {
         public MockUsbTokenRepository() : base()
         {
-            CreateTokens();
+            Task.Run(async () => await CreateTokens());
         }
 
-        private void CreateTokens()
+        private async Task CreateTokens()
         {
             var token = new UsbTokenLicense
             {
@@ -24,7 +25,7 @@ namespace DAL.MockRepositories
                 K1 = "4444 5555 6666 7777",
                 UsbTokenApi = new UsbTokenApi(),
             };
-            Insert(token);
+            await Insert(token);
             var token1 = new UsbTokenLicense
             {
                 Id = 2,
@@ -36,7 +37,7 @@ namespace DAL.MockRepositories
                 K1 = "6666 5555 6666 7777",
                 UsbTokenApi = new UsbTokenApi(),
             };
-            Insert(token1);
+            await Insert(token1);
         }
     }
 }

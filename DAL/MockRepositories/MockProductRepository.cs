@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DAL.Repositories;
 using Domain;
 
@@ -11,10 +12,10 @@ namespace DAL.MockRepositories
         public MockProductRepository(ILicenseRepository<UsbTokenLicense> licenseRepo) : base()
         {
             _licenseRepo = licenseRepo;
-            CreateProductsList();
+            Task.Run(async () => await CreateProductsList());
         }
 
-        private void CreateProductsList()
+        private async Task CreateProductsList()
         {
             var viProtection = new List<ViProtection>
             {
@@ -44,7 +45,7 @@ namespace DAL.MockRepositories
                 },
                 ViProtectionInfo = viProtection,
             };
-            Insert(product);
+            await Insert(product);
         }
     }
 }

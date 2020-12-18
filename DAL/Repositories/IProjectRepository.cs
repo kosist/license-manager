@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using Domain;
 
 namespace DAL.Repositories
 {
     public interface IProjectRepository : IGenericItemRepository<Project>
     {
-        void AddProductToProject(int projectId, Product product);
+        Task AddProductToProject(int projectId, Product product);
     }
 }
