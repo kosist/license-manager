@@ -26,9 +26,9 @@ namespace LicenseManagerWeb.Controllers
             _customerRepo = customerRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_projectRepo.GetList());
+            return View(await _projectRepo.GetList());
         }
 
         public async Task<IActionResult> Edit(int? id)

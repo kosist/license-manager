@@ -18,23 +18,23 @@ namespace LicenseManagerWeb.Controllers
             _licenseRepo = licenseRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_licenseRepo.GetList());
+            return View(await _licenseRepo.GetList());
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return NotFound();
-            var license = _licenseRepo.GetById(id);
+            var license = await _licenseRepo.GetById(id);
             if (license == null)
                 return NotFound();
 
             return View(license);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -42,7 +42,7 @@ namespace LicenseManagerWeb.Controllers
                 return View(usbTokenViewModel.UsbToken);
             }
 
-            var license = _licenseRepo.GetById(id);
+            var license = await _licenseRepo.GetById(id);
             if (license == null)
             {
                 return NotFound();
@@ -51,16 +51,16 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(UsbTokenLicense license)
+        public async Task<IActionResult> Edit(UsbTokenLicense license)
         {
             if (ModelState.IsValid)
             {
-                if (_licenseRepo.GetById(license.Id) == null)
+                if (await _licenseRepo.GetById(license.Id) == null)
                 {
-                    _licenseRepo.Insert(license);
+                    await _licenseRepo.Insert(license);
                 }
                 else
-                    _licenseRepo.Update(license);
+                    await _licenseRepo.Update(license);
                 return RedirectToAction("Index");
             }
             else

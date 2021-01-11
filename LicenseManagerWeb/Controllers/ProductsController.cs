@@ -25,9 +25,9 @@ namespace LicenseManagerWeb.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_productRepo.GetList());
+            return View(await _productRepo.GetList());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -46,7 +46,7 @@ namespace LicenseManagerWeb.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             var productViewModel = new SwProductViewModel();
-            productViewModel.PopulateTokensList(_licenseRepo);
+            await productViewModel.PopulateTokensList(_licenseRepo);
             if (id == null)
             {
                 return View(productViewModel);
