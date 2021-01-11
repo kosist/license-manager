@@ -24,9 +24,9 @@ namespace LicenseManagerWeb.ViewModels
             };
         }
 
-        public void PopulateTokensList(ILicenseRepository<UsbTokenLicense> tokensRepo)
+        public async Task PopulateTokensList(ILicenseRepository<UsbTokenLicense> tokensRepo)
         {
-            var tokens = tokensRepo.GetList();
+            var tokens = await tokensRepo.GetList();
             UsbTokens = new List<UsbTokensListDto>();
             foreach (var token in tokens)
             {

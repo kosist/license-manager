@@ -31,10 +31,10 @@ namespace LicenseManagerWeb.Controllers
             return View(_projectRepo.GetList());
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             var project = new Project();
-            var customers = _customerRepo.GetList().ToList();
+            var customers = _customerRepo.GetList().Result.ToList();
             if (id == null)
                 return View(new ProjectEditViewModel
                 {
@@ -42,7 +42,7 @@ namespace LicenseManagerWeb.Controllers
                     Customers = customers,
                 });
 
-            project = _projectRepo.GetById(id);
+            project = await _projectRepo.GetById(id);
             if (project == null)
                 return NotFound();
             
@@ -55,26 +55,26 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ProjectEditViewModel projectViewModel)
+        public async Task<IActionResult> Edit(ProjectEditViewModel projectViewModel)
         {
             if (ModelState.IsValid)
             {
-                var existingProject = _projectRepo.GetById(projectViewModel.Project.Id);
+                var existingProject = await _projectRepo.GetById(projectViewModel.Project.Id);
                 if (existingProject == null)
                 {
                     var newProject = new Project
                     {
                         Name = projectViewModel.Project.Name,
-                        Customer = _customerRepo.GetById(projectViewModel.Project.CustomerId),
+                        Customer = await _customerRepo.GetById(projectViewModel.Project.CustomerId),
                     };
-                    _projectRepo.Insert(newProject);
+                    await _projectRepo.Insert(newProject);
                 }
                 else
                 {
-                    var customer = _customerRepo.GetById(projectViewModel.Project.CustomerId);
+                    var customer = await _customerRepo.GetById(projectViewModel.Project.CustomerId);
                     existingProject = _mapper.Map<ProjectDto, Project>(projectViewModel.Project);
                     existingProject.Customer = customer;
-                    _projectRepo.Update(existingProject);
+                    await _projectRepo.Update(existingProject);
                 }
                 
                 return RedirectToAction("Index");
@@ -85,11 +85,11 @@ namespace LicenseManagerWeb.Controllers
             }
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return NotFound();
-            var project = _projectRepo.GetById(id);
+            var project = await _projectRepo.GetById(id);
             if (project == null)
                 return NotFound();
 
@@ -105,15 +105,15 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
                 return NotFound();
-            var project = _projectRepo.GetById(id);
+            var project = await _projectRepo.GetById(id);
             if (project == null)
                 return NotFound();
             else
-                _projectRepo.Delete(id);
+                await _projectRepo.Delete(id);
             return RedirectToAction("Index");
         }
     }

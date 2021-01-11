@@ -40,7 +40,7 @@ namespace DAL.MockRepositories
 
         public async Task Update(TDomain item)
         {
-            var oldItem = GetById(item.Id);
+            var oldItem = await GetById(item.Id);
             var index = items.IndexOf(oldItem);
             if (index != -1)
                 items[index] = item;

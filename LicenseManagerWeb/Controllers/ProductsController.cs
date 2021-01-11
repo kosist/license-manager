@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using DAL.Repositories;
 using Domain;
@@ -29,12 +30,12 @@ namespace LicenseManagerWeb.Controllers
             return View(_productRepo.GetList());
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return NotFound();
             var swProductView = new SwProductDetailsViewModel();
-            var product = _productRepo.GetById(id);
+            var product = await _productRepo.GetById(id);
             if (product == null)
                 return NotFound();
             swProductView.SwProduct = product;
@@ -42,7 +43,7 @@ namespace LicenseManagerWeb.Controllers
             return View(swProductView);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             var productViewModel = new SwProductViewModel();
             productViewModel.PopulateTokensList(_licenseRepo);
@@ -51,7 +52,7 @@ namespace LicenseManagerWeb.Controllers
                 return View(productViewModel);
             }
 
-            var product = _productRepo.GetById(id);
+            var product = await _productRepo.GetById(id);
             if (product == null)
             {
                 return NotFound();
@@ -62,21 +63,21 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(SwProductViewModel product)
+        public async Task<IActionResult> Edit(SwProductViewModel product)
         {
             
             if (ModelState.IsValid)
             {
-                var newLicense = _licenseRepo.GetById(product.SwProduct.LicenseId);
+                var newLicense = await _licenseRepo.GetById(product.SwProduct.LicenseId);
                 var swProduct = _mapper.Map<Product>(product.SwProduct);
                 if (newLicense != null)
                     swProduct.License = newLicense;
                 if (_productRepo.GetById(product.SwProduct.Id) == null)
                 {
-                    _productRepo.Insert(swProduct);
+                    await _productRepo.Insert(swProduct);
                 }
                 else
-                    _productRepo.Update(swProduct);
+                    await _productRepo.Update(swProduct);
                 return RedirectToAction("Index", "Products");
             }
             else
@@ -85,11 +86,11 @@ namespace LicenseManagerWeb.Controllers
             }
         }
 
-        public IActionResult EditViProtection(int? productId)
+        public async Task<IActionResult> EditViProtection(int? productId)
         {
             if (productId == null)
                 return NotFound();
-            var product = _productRepo.GetById(productId);
+            var product = await _productRepo.GetById(productId);
             if (product == null)
                 return NotFound();
             var protectionList = product.ViProtectionInfo;
@@ -102,7 +103,7 @@ namespace LicenseManagerWeb.Controllers
         }
         
         [HttpPost]
-        public IActionResult EditViProtection(ViProtectionInfoViewModel newInfo)
+        public async Task<IActionResult> EditViProtection(ViProtectionInfoViewModel newInfo)
         {
             var updViProtectionInfo = new ViProtection
             {
@@ -111,12 +112,12 @@ namespace LicenseManagerWeb.Controllers
             };
             if (newInfo.ProductId == null)
                 return NotFound();
-            var product = _productRepo.GetById(newInfo.ProductId);
+            var product = await _productRepo.GetById(newInfo.ProductId);
             if (product == null)
                 return NotFound();
 
             product.ViProtectionInfo.Add(updViProtectionInfo);
-            _productRepo.Update(product);
+            await _productRepo.Update(product);
 
             var viProtectionView = new ViProtectionInfoViewModel
             {
@@ -127,18 +128,18 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult RemoveViProtectionInfo(int itemId, int? productId)
+        public async Task<IActionResult> RemoveViProtectionInfo(int itemId, int? productId)
         {
             if (productId == null)
                 return NotFound();
-            var product = _productRepo.GetById(productId);
+            var product = await _productRepo.GetById(productId);
             if (product == null)
                 return NotFound();
 
             if (itemId <= product.ViProtectionInfo.Count - 1)
             {
                 product.ViProtectionInfo.RemoveAt(itemId);
-                _productRepo.Update(product);
+                await _productRepo.Update(product);
             }
             var viProtectionView = new ViProtectionInfoViewModel
             {
@@ -148,11 +149,11 @@ namespace LicenseManagerWeb.Controllers
             return View("EditViProtection", viProtectionView);
         }
 
-        public IActionResult EditViProtectionInfo(int itemId, int? productId)
+        public async Task<IActionResult> EditViProtectionInfo(int itemId, int? productId)
         {
             if (productId == null)
                 return NotFound();
-            var product = _productRepo.GetById(productId);
+            var product = await _productRepo.GetById(productId);
             if (product == null)
                 return NotFound();
 
@@ -170,12 +171,12 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditViProtectionInfo(EditViProtectionInfoViewModel viProtectionInfo)
+        public async Task<IActionResult> EditViProtectionInfo(EditViProtectionInfoViewModel viProtectionInfo)
         {
             var itemId = viProtectionInfo.ItemId;
             if (viProtectionInfo.ProductId == null)
                 return NotFound();
-            var product = _productRepo.GetById(viProtectionInfo.ProductId);
+            var product = await _productRepo.GetById(viProtectionInfo.ProductId);
             if (product == null)
                 return NotFound();
 
@@ -183,7 +184,7 @@ namespace LicenseManagerWeb.Controllers
             {
                 product.ViProtectionInfo[itemId].Description = viProtectionInfo.Description;
                 product.ViProtectionInfo[itemId].Password = viProtectionInfo.Password;
-                _productRepo.Update(product);
+                await _productRepo.Update(product);
             }
 
             var viProtectionView = new ViProtectionInfoViewModel

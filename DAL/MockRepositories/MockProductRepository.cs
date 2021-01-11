@@ -35,7 +35,7 @@ namespace DAL.MockRepositories
                     SmartSheetLink = "https://www.smartsheet.com/",
                     SourceCodeLocation = "https://github.com/"
                 },
-                License = _licenseRepo.GetById(2),
+                License = await _licenseRepo.GetById(2),
                 EmergencyKey = new EmergencyKey
                 {
                     Id = 1,

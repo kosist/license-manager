@@ -1,4 +1,5 @@
-﻿using DAL.Repositories;
+﻿using System.Threading.Tasks;
+using DAL.Repositories;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using LicenseManagerWeb.ViewModels;
@@ -14,17 +15,17 @@ namespace LicenseManagerWeb.Controllers
             _customerRepo = customerRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_customerRepo.GetList());
+            return View(await _customerRepo.GetList());
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             var customer = new Customer();
             if (id == null)
                 return View(new Customer());
-            customer = _customerRepo.GetById(id);
+            customer = await _customerRepo.GetById(id);
             if (customer == null)
                 return NotFound();
             return View(customer);
@@ -49,11 +50,11 @@ namespace LicenseManagerWeb.Controllers
             }
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return NotFound();
-            var customer = _customerRepo.GetById(id);
+            var customer = await _customerRepo.GetById(id);
             if (customer == null)
                 return NotFound();
 
@@ -66,15 +67,15 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
                 return NotFound();
-            var customer = _customerRepo.GetById(id);
+            var customer = await _customerRepo.GetById(id);
             if (customer == null)
                 return NotFound();
             else
-                _customerRepo.Delete(id);
+                await _customerRepo.Delete(id);
             return RedirectToAction("Index");
         }
 
