@@ -36,7 +36,9 @@ namespace LicenseManagerWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_customerRepo.GetById(customer.Id) == null)
+                if (customer.Id == null)
+                    _customerRepo.Insert(customer);
+                else if (_customerRepo.GetById(customer.Id) == null)
                 {
                     _customerRepo.Insert(customer);
                 }

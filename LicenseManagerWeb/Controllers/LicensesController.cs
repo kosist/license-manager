@@ -30,7 +30,6 @@ namespace LicenseManagerWeb.Controllers
             var license = await _licenseRepo.GetById(id);
             if (license == null)
                 return NotFound();
-
             return View(license);
         }
 
@@ -41,7 +40,6 @@ namespace LicenseManagerWeb.Controllers
                 var usbTokenViewModel = new UsbTokenViewModel();
                 return View(usbTokenViewModel.UsbToken);
             }
-
             var license = await _licenseRepo.GetById(id);
             if (license == null)
             {
