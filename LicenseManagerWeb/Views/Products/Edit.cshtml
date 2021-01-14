@@ -1,5 +1,10 @@
 ﻿@model LicenseManagerWeb.ViewModels.SwProductViewModel
 
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <h4>Product</h4>
 <hr />
 <form asp-action="Edit">
@@ -97,30 +102,30 @@
 <hr />
 
 @*<div class="row">
-    <div class="col-md-8 mb-4 order-md-1" id="viProtectionInfoDiv">
-        <partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />
-    </div>
-    <div class="col-md-4 mb-4 order-md-2">
-        <h4 class="d-flex justify-content-between align-items-center">
-            <span class="text-muted">Update information</span>
-        </h4>
-        <form id="form-viProtectionInfo">
-            <div class="form-group">
-                <label asp-for="ViProtectionViewModel.Description" class="control-label" ></label>
-                <input asp-for="ViProtectionViewModel.Description" class="form-control" id="viProtectionDescription" onchange="onViProtectionInfoChange();"/>
-                <span asp-validation-for="ViProtectionViewModel.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ViProtectionViewModel.Password" class="control-label"></label>
-                <input asp-for="ViProtectionViewModel.Password" class="form-control" id="viProtectionPassword" onchange="onViProtectionInfoChange();"/>
-                <span asp-validation-for="ViProtectionViewModel.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="button" value="Save Protection Info" class="btn btn-primary" id="btn-submitViProtectionInfo" />
-            </div>
-        </form>
-    </div>
-</div>*@
+        <div class="col-md-8 mb-4 order-md-1" id="viProtectionInfoDiv">
+            <partial name="_ViProtectionInfo" model="Model.SwProduct.ViProtectionInfo" />
+        </div>
+        <div class="col-md-4 mb-4 order-md-2">
+            <h4 class="d-flex justify-content-between align-items-center">
+                <span class="text-muted">Update information</span>
+            </h4>
+            <form id="form-viProtectionInfo">
+                <div class="form-group">
+                    <label asp-for="ViProtectionViewModel.Description" class="control-label" ></label>
+                    <input asp-for="ViProtectionViewModel.Description" class="form-control" id="viProtectionDescription" onchange="onViProtectionInfoChange();"/>
+                    <span asp-validation-for="ViProtectionViewModel.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ViProtectionViewModel.Password" class="control-label"></label>
+                    <input asp-for="ViProtectionViewModel.Password" class="form-control" id="viProtectionPassword" onchange="onViProtectionInfoChange();"/>
+                    <span asp-validation-for="ViProtectionViewModel.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Save Protection Info" class="btn btn-primary" id="btn-submitViProtectionInfo" />
+                </div>
+            </form>
+        </div>
+    </div>*@
 
 
 

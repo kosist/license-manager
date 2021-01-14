@@ -12,5 +12,6 @@ namespace LicenseManagerWeb.DTOs
 
         public string Key { get; set; }
         public int ExecutionIntervalMinutes { get; set; }
+        public bool Active { get; set; }
     }
 }

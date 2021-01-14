@@ -72,7 +72,11 @@ namespace LicenseManagerWeb.Controllers
                 var swProduct = _mapper.Map<Product>(product.SwProduct);
                 if (newLicense != null)
                     swProduct.License = newLicense;
-                if (_productRepo.GetById(product.SwProduct.Id) == null)
+                if (product.SwProduct.Id == null)
+                {
+                    await _productRepo.Insert(swProduct);
+                }
+                else if (_productRepo.GetById(product.SwProduct.Id) == null)
                 {
                     await _productRepo.Insert(swProduct);
                 }

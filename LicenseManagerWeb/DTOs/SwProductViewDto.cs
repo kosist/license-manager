@@ -7,7 +7,7 @@ namespace LicenseManagerWeb.DTOs
 {
     public class SwProductViewDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [DisplayName("Product ID")]
         [Required]
