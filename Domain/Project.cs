@@ -10,6 +10,6 @@ namespace Domain
         public Customer Customer { get; set; }
         public ICollection<Product> SwProducts { get; set; }
         public int CustomerId { get; set; }
-        public ICollection<User> AssignedUsers { get; set; }
+        public ICollection<UserProject> UserProjects { get; set; }
     }
 }

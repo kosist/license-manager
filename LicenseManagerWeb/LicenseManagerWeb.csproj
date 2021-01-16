@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-LicenseManagerWeb-FDE0DF54-FE06-4231-AF26-7A4C60BA6BE8</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20210116202014_InitialCreate.cs" />
+    <Compile Remove="Data\Migrations\20210116202014_InitialCreate.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />

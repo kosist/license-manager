@@ -6,6 +6,6 @@ namespace Domain
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public ICollection<Project> AssignedProjects { get; set; }
+        public ICollection<UserProject> UserProjects { get; set; }
     }
 }
