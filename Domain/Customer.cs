@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
     public class Customer : BaseItem
+
     {
         [Required]
         public string Name { get; set; }
@@ -13,6 +15,7 @@ namespace Domain
         [Required]
         public string Address { get; set; }
 
+        private ICollection<Project> Projects { get; set; }
 
     }
 }

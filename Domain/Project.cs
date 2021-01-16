@@ -8,6 +8,8 @@ namespace Domain
         [Required]
         public string Name { get; set; }
         public Customer Customer { get; set; }
-        public List<Product> SwProducts { get; set; }
+        public ICollection<Product> SwProducts { get; set; }
+        public int CustomerId { get; set; }
+        public ICollection<User> AssignedUsers { get; set; }
     }
 }
