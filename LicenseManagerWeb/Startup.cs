@@ -41,10 +41,10 @@ namespace LicenseManagerWeb
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddSingleton<IProjectRepository, MockProjectRepository>();
-            services.AddSingleton<ICustomerRepository, MockCustomerRepository>();
-            services.AddSingleton<IProductRepository, MockProductRepository>();
-            services.AddSingleton<ILicenseRepository<UsbTokenLicense>, MockUsbTokenRepository>();
+            services.AddScoped<IProjectRepository, EfProjectRepository>();
+            services.AddScoped<ICustomerRepository, EfCustomerRepository>();
+            services.AddScoped<IProductRepository, EfProductRepository>();
+            services.AddScoped<ILicenseRepository<UsbTokenLicense>, EfUsbTokenRepository>();
 
             services.AddAutoMapper(System.Reflection.Assembly.GetExecutingAssembly());
         }
