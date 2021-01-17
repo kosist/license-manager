@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace LicenseManagerWeb.Data.Migrations
+namespace DAL.Migrations
 {
     public partial class AddDbSets : Migration
     {

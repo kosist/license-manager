@@ -20,7 +20,7 @@ namespace DAL.EFRepositories
         {
             var entity = await _context.Set<TDomain>().FindAsync(id);
             if (entity == null)
-            _context.Set<TDomain>().Remove(entity);
+                _context.Set<TDomain>().Remove(entity);
             await _context.SaveChangesAsync();
         }
 

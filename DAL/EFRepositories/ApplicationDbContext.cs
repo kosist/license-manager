@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Domain;
+﻿using Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace LicenseManagerWeb.Data
+namespace DAL.EFRepositories
 {
     public class ApplicationDbContext : IdentityDbContext
     {
