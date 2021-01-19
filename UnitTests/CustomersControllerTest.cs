@@ -54,11 +54,37 @@ namespace UnitTests
                 };
 
                 await controller.Edit(customer);
-                var customers = await controller.Index();
-                var allCustomers = customers as ViewResult;
-                var castedCustomers = allCustomers.Model as IEnumerable<Customer>;
+                var customers = await repo.GetList();
 
-                Assert.Equal("CustomerA", castedCustomers.First().Name);
+                Assert.Equal("CustomerA", customers.First().Name);
+            }
+        }
+
+        [Fact]
+        public async void DeleteCustomer()
+        {
+            using (var context = new ApplicationDbContext(ContextOptions))
+            {
+                var repo = new EfCustomerRepository(context);
+                var controller = new CustomersController(repo);
+
+                var customer = new Customer
+                {
+                    Name = "CustomerA",
+                    Address = "AddressA",
+                    Country = "CountryA"
+                };
+
+                await controller.Edit(customer);
+
+                var customers = await repo.GetList();
+
+                await controller.Delete(customers.First().Id);
+
+                var customersAfterDeletion = await repo.GetList();
+
+
+                Assert.Empty(customersAfterDeletion);
             }
         }
     }

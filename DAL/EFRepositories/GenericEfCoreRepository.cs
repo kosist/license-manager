@@ -19,7 +19,7 @@ namespace DAL.EFRepositories
         public async Task Delete(int? id)
         {
             var entity = await _context.Set<TDomain>().FindAsync(id);
-            if (entity == null)
+            if (entity != null)
                 _context.Set<TDomain>().Remove(entity);
             await _context.SaveChangesAsync();
         }

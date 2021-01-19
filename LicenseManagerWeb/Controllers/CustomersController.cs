@@ -77,8 +77,7 @@ namespace LicenseManagerWeb.Controllers
             var customer = await _customerRepo.GetById(id);
             if (customer == null)
                 return NotFound();
-            else
-                await _customerRepo.Delete(id);
+            await _customerRepo.Delete(id);
             return RedirectToAction("Index");
         }
 
