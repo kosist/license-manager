@@ -36,7 +36,7 @@ namespace DAL.EFRepositories
 
         public async Task Insert(TDomain item)
         {
-            _context.Set<TDomain>().Add(item);
+            await _context.Set<TDomain>().AddAsync(item);
             await _context.SaveChangesAsync();
         }
 

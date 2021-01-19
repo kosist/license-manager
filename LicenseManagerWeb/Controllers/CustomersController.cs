@@ -17,7 +17,8 @@ namespace LicenseManagerWeb.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _customerRepo.GetList());
+            var view = await _customerRepo.GetList();
+            return View(view);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -32,19 +33,19 @@ namespace LicenseManagerWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Customer customer)
+        public async Task<IActionResult> Edit(Customer customer)
         {
             if (ModelState.IsValid)
             {
                 if (customer.Id == null)
-                    _customerRepo.Insert(customer);
-                else if (_customerRepo.GetById(customer.Id) == null)
+                    await _customerRepo.Insert(customer);
+                else if (await _customerRepo.GetById(customer.Id) == null)
                 {
-                    _customerRepo.Insert(customer);
+                    await _customerRepo.Insert(customer);
                 }
                 else
-                    _customerRepo.Update(customer);
-                return RedirectToAction("Index");
+                    await _customerRepo.Update(customer);
+                return RedirectToAction("Index"); 
             }
             else
             {
