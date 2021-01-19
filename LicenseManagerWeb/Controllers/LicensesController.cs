@@ -66,5 +66,17 @@ namespace LicenseManagerWeb.Controllers
                 return ValidationProblem();
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+            var customer = await _licenseRepo.GetById(id);
+            if (customer == null)
+                return NotFound();
+            await _licenseRepo.Delete(id);
+            return RedirectToAction("Index");
+        }
     }
 }
