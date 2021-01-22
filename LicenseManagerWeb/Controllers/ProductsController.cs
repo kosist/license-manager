@@ -79,6 +79,7 @@ namespace LicenseManagerWeb.Controllers
             {
                 var newLicense = await _licenseRepo.GetById(product.SwProduct.LicenseId);
                 var swProduct = _mapper.Map<Product>(product.SwProduct);
+                swProduct.ProjectId = product.Project.Id;
                 if (newLicense != null)
                     swProduct.License = newLicense;
                 if (product.SwProduct.Id == null)

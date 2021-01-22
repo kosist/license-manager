@@ -8,7 +8,7 @@ namespace DAL.EFRepositories
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Product> Type { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<UsbTokenLicense> UsbTokenLicenses { get; set; }
         public DbSet<UserProject> UserProjects { get; set; }
 
