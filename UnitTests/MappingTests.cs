@@ -19,6 +19,7 @@ namespace UnitTests
                     mc.AddProfile(new EmergencyKeyMappingProfile());
                     mc.AddProfile(new ProjectMappingProfile());
                     mc.AddProfile(new SwProductMappingProfile());
+                    mc.AddProfile(new ProjectsListMappingProfile());
                 });
                 IMapper mapper = _mapperCfg.CreateMapper();
                 _mapper = mapper;
