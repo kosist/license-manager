@@ -16,7 +16,7 @@ namespace DAL.EFRepositories
             _context = context;
         }
 
-        public async Task Delete(int? id)
+        public virtual async Task Delete(int? id)
         {
             var entity = await _context.Set<TDomain>().FindAsync(id);
             if (entity != null)
@@ -24,23 +24,23 @@ namespace DAL.EFRepositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<TDomain> GetById(int? id)
+        public virtual async Task<TDomain> GetById(int? id)
         {
             return await _context.Set<TDomain>().FindAsync(id);
         }
 
-        public async Task<IEnumerable<TDomain>> GetList()
+        public virtual async Task<IEnumerable<TDomain>> GetList()
         {
             return await _context.Set<TDomain>().ToListAsync();
         }
 
-        public async Task Insert(TDomain item)
+        public virtual async Task Insert(TDomain item)
         {
             await _context.Set<TDomain>().AddAsync(item);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Update(TDomain item)
+        public virtual async Task Update(TDomain item)
         {
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
