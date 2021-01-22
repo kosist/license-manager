@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
@@ -13,6 +14,9 @@ namespace LicenseManagerWeb.ViewModels
         public SwProductViewDto SwProduct { get; set; }
         public List<UsbTokensListDto> UsbTokens { get; private set; }
 
+        public IEnumerable<ProjectsListDto> Projects { get; set; }
+        public ProjectsListDto Project { get; set; }
+
         public SwProductViewModel()
         {            
             SwProduct = new SwProductViewDto
@@ -22,6 +26,7 @@ namespace LicenseManagerWeb.ViewModels
                 ViProtectionInfo = new List<ViProtection>(),
                 ProductChanges = new List<ProductChange>(),
             };
+            Projects = new List<ProjectsListDto>();
         }
 
         public async Task PopulateTokensList(ILicenseRepository<UsbTokenLicense> tokensRepo)

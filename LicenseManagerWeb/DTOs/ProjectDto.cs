@@ -7,6 +7,7 @@ namespace LicenseManagerWeb.DTOs
 {
     public class ProjectDto
     {
+        
         public int Id { get; set; }
 
         [Required]

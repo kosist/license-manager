@@ -28,5 +28,6 @@ namespace LicenseManagerWeb.DTOs
         public List<ProductChange> ProductChanges { get; set; }
         public List<ViProtection> ViProtectionInfo { get; set; }
         public int ProjectId { get; set; }
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DAL.Repositories;
@@ -15,13 +16,16 @@ namespace LicenseManagerWeb.Controllers
         private IProductRepository _productRepo;
         private ILicenseRepository<UsbTokenLicense> _licenseRepo;
         private IMapper _mapper;
+        private IProjectRepository _projectRepo;
 
         public ProductsController(IProductRepository productRepo,
                                   ILicenseRepository<UsbTokenLicense> licenseRepo,
+                                  IProjectRepository projectRepo,
                                   IMapper mapper)
         {
             _productRepo = productRepo;
             _licenseRepo = licenseRepo;
+            _projectRepo = projectRepo;
             _mapper = mapper;
         }
 
@@ -45,7 +49,12 @@ namespace LicenseManagerWeb.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
-            var productViewModel = new SwProductViewModel();
+            var projects = _mapper.Map<IEnumerable<Project>, IEnumerable<ProjectsListDto>>(await _projectRepo.GetList());
+
+            var productViewModel = new SwProductViewModel
+            {
+                Projects = projects,
+            };
             await productViewModel.PopulateTokensList(_licenseRepo);
             if (id == null)
             {
